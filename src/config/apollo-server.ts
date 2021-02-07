@@ -13,6 +13,7 @@ import { BusinessResolver } from "../interfaces/resolvers/business-resolver";
 import { SubcategoryResolver } from "../interfaces/resolvers/subcategory-resolver";
 import { CategoryResolver } from "../interfaces/resolvers/category-resolver";
 import { HeadquarterResolver } from "../interfaces/resolvers/headquarter-resolver";
+import { ProductCategoryResolver } from "../interfaces/resolvers/product-category-resolver";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -28,6 +29,7 @@ const startGraphqlServer = async (app: Application) => {
         SubcategoryResolver,
         CategoryResolver,
         HeadquarterResolver,
+        ProductCategoryResolver,
       ],
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],
