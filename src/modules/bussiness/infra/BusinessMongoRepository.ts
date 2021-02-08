@@ -15,7 +15,7 @@ export default class BusinessMongoRepository implements BusinessRepository {
       .populate("cityId")
       .populate("userId")
       .populate("categoryId")
-      .populate("productCategories")
+      .populate("subcategories")
       .exec();
   }
 
@@ -29,7 +29,7 @@ export default class BusinessMongoRepository implements BusinessRepository {
   ): Promise<number> {
     const result = await BusinessDocument.updateOne(
       { _id: businessId },
-      { productCategories: categories }
+      { subcategories: categories }
     );
 
     return result.nModified;

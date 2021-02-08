@@ -9,6 +9,7 @@ const TYPES = {
   CategoryRepository: Symbol.for("CategoryRepository"),
   HeadquarterRepository: Symbol.for("HeadquarterRepository"),
   ProductCategoryRepository: Symbol.for("ProductCategoryRepository"),
+  ProductRepository: Symbol.for("ProductRepository"),
 };
 
 export { TYPES };

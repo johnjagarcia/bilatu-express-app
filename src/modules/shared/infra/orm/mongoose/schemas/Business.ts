@@ -2,7 +2,7 @@ import { Document, model, Schema } from "mongoose";
 import { customAlphabet } from "nanoid";
 import BusinessCategory from "./BusinessCategory";
 import City from "./City";
-import ProductCategory from "./Subcategory";
+import Subcategory from "./Subcategory";
 import User from "./User";
 
 interface BusinessDocument extends Document {
@@ -17,7 +17,7 @@ interface BusinessDocument extends Document {
   email: string;
   nit: string;
   userId: string;
-  productCategories: string[];
+  subcategories: string[];
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -98,10 +98,10 @@ const businessSchema = new Schema({
     ref: User,
     required: true,
   },
-  productCategories: [
+  subcategories: [
     {
       type: Schema.Types.ObjectId,
-      ref: ProductCategory,
+      ref: Subcategory,
     },
   ],
   active: {
