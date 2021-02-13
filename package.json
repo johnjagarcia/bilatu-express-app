@@ -1,11 +1,12 @@
 {
-  "name": "HiShopExpressApp",
+  "name": "bilatu-express-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon src/index.ts --exec ts-node",
-    "preinstall": "npx npm-force-resolutions"
+    "preinstall": "npx npm-force-resolutions",
+    "build": "tsc --project ./"
   },
   "keywords": [],
   "author": "",
