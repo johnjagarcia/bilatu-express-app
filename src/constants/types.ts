@@ -8,6 +8,8 @@ const TYPES = {
   SubcategoryRepository: Symbol.for("SubcategoryRepository"),
   CategoryRepository: Symbol.for("CategoryRepository"),
   HeadquarterRepository: Symbol.for("HeadquarterRepository"),
+  ProductCategoryRepository: Symbol.for("ProductCategoryRepository"),
+  ProductRepository: Symbol.for("ProductRepository"),
 };
 
 export { TYPES };

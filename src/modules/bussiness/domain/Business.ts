@@ -11,7 +11,7 @@ export default class Business {
   email?: string;
   nit?: string;
   userId: string;
-  productCategories?: string[];
+  subcategories?: string[];
   active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

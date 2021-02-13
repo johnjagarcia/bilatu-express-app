@@ -43,7 +43,7 @@ export default class Business {
   userId: User;
 
   @Field((type) => [Subcategory])
-  productCategories: Subcategory[];
+  subcategories: Subcategory[];
 
   @Field()
   active: boolean;

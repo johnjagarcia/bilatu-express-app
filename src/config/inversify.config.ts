@@ -55,6 +55,18 @@ import HeadquarterMongoRepository from "../modules/headquarter/infra/Headquarter
 import CreateHeadquarter from "../modules/headquarter/app/create-headquarter";
 import GetHeadquarters from "../modules/headquarter/app/get-headquarter";
 
+import { ProductCategoryResolver } from "../interfaces/resolvers/product-category-resolver";
+import ProductCategoryRepository from "../modules/product-category/domain/ProductCategoryRepository";
+import ProductCategoryMongoRepository from "../modules/product-category/infra/ProductCategoryMongoRepository";
+import CreateProductCategory from "../modules/product-category/app/create-product-category";
+import GetProductCategories from "../modules/product-category/app/get-product-categories";
+
+import { ProductResolver } from "../interfaces/resolvers/product-resolver";
+import ProductRepository from "../modules/product/domain/ProductRepository";
+import ProductMongoRepository from "../modules/product/infra/ProductMongoRepository";
+import CreateProduct from "../modules/product/app/create-product";
+import GetProducts from "../modules/product/app/get-products";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -67,6 +79,8 @@ myContainer.bind<BusinessResolver>(BusinessResolver).toSelf();
 myContainer.bind<SubcategoryResolver>(SubcategoryResolver).toSelf();
 myContainer.bind<CategoryResolver>(CategoryResolver).toSelf();
 myContainer.bind<HeadquarterResolver>(HeadquarterResolver).toSelf();
+myContainer.bind<ProductCategoryResolver>(ProductCategoryResolver).toSelf();
+myContainer.bind<ProductResolver>(ProductResolver).toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -115,7 +129,7 @@ myContainer
   .inSingletonScope();
 myContainer.bind<GetBusiness>(GetBusiness).to(GetBusiness).inSingletonScope();
 
-/* Product Categories */
+/* Subcategories */
 myContainer
   .bind<SubcategoryRepository>(TYPES.SubcategoryRepository)
   .to(SubcategoryMongoRepository);
@@ -157,5 +171,28 @@ myContainer
   .bind<GetHeadquarters>(GetHeadquarters)
   .to(GetHeadquarters)
   .inSingletonScope();
+
+/* Product Categories */
+myContainer
+  .bind<ProductCategoryRepository>(TYPES.ProductCategoryRepository)
+  .to(ProductCategoryMongoRepository);
+myContainer
+  .bind<CreateProductCategory>(CreateProductCategory)
+  .to(CreateProductCategory)
+  .inSingletonScope();
+myContainer
+  .bind<GetProductCategories>(GetProductCategories)
+  .to(GetProductCategories)
+  .inSingletonScope();
+
+/* Products */
+myContainer
+  .bind<ProductRepository>(TYPES.ProductRepository)
+  .to(ProductMongoRepository);
+myContainer
+  .bind<CreateProduct>(CreateProduct)
+  .to(CreateProduct)
+  .inSingletonScope();
+myContainer.bind<GetProducts>(GetProducts).to(GetProducts).inSingletonScope();
 
 export default myContainer;

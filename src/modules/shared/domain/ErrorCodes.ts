@@ -9,4 +9,5 @@ export enum ErrorCodes {
   SubcategoryWithSameName = "SUBCATEGORY_WITH_SAME_NAME",
   CategoryWithSameName = "CATEGORY_WITH_SAME_NAME",
   ExistingMainHeadquarter = "EXISTING_MAIN_HEADQUARTER",
+  ProductCategoryWithSameName = "PRODUCT_CATEGORY_WITH_SAME_NAME",
 }
