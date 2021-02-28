@@ -41,6 +41,7 @@ import SubcategoryRepository from "../modules/subcategory/domain/SubcategoryRepo
 import SubcategoryMongoRepository from "../modules/subcategory/infra/SubcategoryMongoRepository";
 import CreateSubcategory from "../modules/subcategory/app/create-subcategory";
 import GetSubcategories from "../modules/subcategory/app/get-subcategories";
+import UpdateSubcategoryImage from "../modules/subcategory/app/update-subcategory-image";
 
 import { CategoryResolver } from "../interfaces/resolvers/category-resolver";
 import CategoryRepository from "../modules/category/domain/CategoryRepository";
@@ -145,6 +146,10 @@ myContainer
 myContainer
   .bind<GetSubcategories>(GetSubcategories)
   .to(GetSubcategories)
+  .inSingletonScope();
+myContainer
+  .bind<UpdateSubcategoryImage>(UpdateSubcategoryImage)
+  .to(UpdateSubcategoryImage)
   .inSingletonScope();
 
 /* Categories */

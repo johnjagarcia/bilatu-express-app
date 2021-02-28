@@ -13,13 +13,19 @@ export default class SubcategoryMongoRepository
   }
 
   async getList(): Promise<Subcategory[]> {
-    return await SubcategoryDocument.find()
+    return await SubcategoryDocument.find({ active: true })
       .sort("name")
       .populate("categoryId")
+      .populate("blobId")
       .exec();
   }
 
   async findByName(name: string): Promise<Subcategory | null> {
-    return await SubcategoryDocument.findOne({ name });
+    return await SubcategoryDocument.findOne({ name, active: true });
+  }
+
+  async updateImage(_id: string, blobId: string): Promise<boolean> {
+    const response = await SubcategoryDocument.updateOne({ _id }, { blobId });
+    return response.nModified === 1;
   }
 }

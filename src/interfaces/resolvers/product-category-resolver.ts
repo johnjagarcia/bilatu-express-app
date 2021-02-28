@@ -20,7 +20,7 @@ export class ProductCategoryResolver {
     @Arg("name") name: string,
     @Arg("subcategoryid") subcategoryId: string,
     @Arg("file", () => GraphQLUpload, { nullable: true })
-    { filename, mimetype, createReadStream }: Upload
+    { mimetype, createReadStream }: Upload
   ) {
     return await this.createProductCategoryUseCase.execute(
       name,

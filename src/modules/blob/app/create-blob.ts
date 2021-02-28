@@ -10,7 +10,7 @@ export default class CreateBlob {
     @inject(TYPES.BlobRepository) private repository: BlobRepository
   ) {}
 
-  async execute(stream: () => Stream, type: string) {
+  async execute(stream: () => Stream, type: string): Promise<string> {
     const data = await this.streamToBuffer(stream());
 
     const role = new BlobBuilder()

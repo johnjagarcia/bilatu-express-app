@@ -1,9 +1,11 @@
 import { Document, model, Schema } from "mongoose";
+import Blob from "./Blob";
 import Category from "./Category";
 
 interface SubcategoryDocument extends Document {
   name: string;
   categoryId: string;
+  blobId?: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -20,6 +22,10 @@ const subcategoryTypeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: Category,
     required: true,
+  },
+  blobId: {
+    type: Schema.Types.ObjectId,
+    ref: Blob,
   },
   active: {
     type: Boolean,
