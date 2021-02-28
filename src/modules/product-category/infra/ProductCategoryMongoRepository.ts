@@ -2,7 +2,6 @@ import { injectable } from "inversify";
 import ProductCategory from "../domain/ProductCategory";
 import ProductCategoryRepository from "../domain/ProductCategoryRepository";
 import ProductCategoryDocument from "../../shared/infra/orm/mongoose/schemas/ProductCategory";
-
 @injectable()
 export default class ProductCategoryMongoRepository
   implements ProductCategoryRepository {
@@ -11,13 +10,17 @@ export default class ProductCategoryMongoRepository
       productCategory
     );
     const savedProductCategory = await productCategoryDocument.save();
-    return savedProductCategory.populate("subcategoryId").execPopulate();
+    return savedProductCategory
+      .populate("subcategoryId")
+      .populate("blobId")
+      .execPopulate();
   }
 
   async getList(): Promise<ProductCategory[]> {
     return await ProductCategoryDocument.find()
       .sort("name")
       .populate("subcategoryId")
+      .populate("blobId")
       .exec();
   }
 

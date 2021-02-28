@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
+import Blob from "./Blob";
 import Subcategory from "./Subcategory";
 
 @ObjectType()
@@ -11,6 +12,9 @@ export default class ProductCategory {
 
   @Field({ name: "subcategory" })
   subcategoryId: Subcategory;
+
+  @Field({ name: "image" })
+  blobId: Blob;
 
   @Field()
   active: boolean;

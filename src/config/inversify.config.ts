@@ -67,6 +67,11 @@ import ProductMongoRepository from "../modules/product/infra/ProductMongoReposit
 import CreateProduct from "../modules/product/app/create-product";
 import GetProducts from "../modules/product/app/get-products";
 
+import CreateBlob from "../modules/blob/app/create-blob";
+import BlobRepository from "../modules/blob/domain/BlobRepository";
+import BlobMongoRepository from "../modules/blob/infra/BlobMongoRepository";
+import GetBlob from "../modules/blob/app/get-blob";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -194,5 +199,10 @@ myContainer
   .to(CreateProduct)
   .inSingletonScope();
 myContainer.bind<GetProducts>(GetProducts).to(GetProducts).inSingletonScope();
+
+/* Products */
+myContainer.bind<BlobRepository>(TYPES.BlobRepository).to(BlobMongoRepository);
+myContainer.bind<CreateBlob>(CreateBlob).to(CreateBlob).inSingletonScope();
+myContainer.bind<GetBlob>(GetBlob).to(GetBlob).inSingletonScope();
 
 export default myContainer;

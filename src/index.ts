@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import express from "express";
 import startGraphqlServer from "./config/apollo-server";
 import { connectDB } from "./modules/shared/infra/orm/mongoose/connection";
-import { graphqlUploadExpress } from "graphql-upload";
 
 dotenv.config();
 

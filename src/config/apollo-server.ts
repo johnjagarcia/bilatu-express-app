@@ -15,6 +15,7 @@ import { CategoryResolver } from "../interfaces/resolvers/category-resolver";
 import { HeadquarterResolver } from "../interfaces/resolvers/headquarter-resolver";
 import { ProductCategoryResolver } from "../interfaces/resolvers/product-category-resolver";
 import { ProductResolver } from "../interfaces/resolvers/product-resolver";
+import { graphqlUploadExpress } from "graphql-upload";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -36,7 +37,9 @@ const startGraphqlServer = async (app: Application) => {
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],
     }),
+    uploads: false,
   });
+  app.use(graphqlUploadExpress({ maxFieldSize: 10000, maxFiles: 10 }));
 
   server.applyMiddleware({ app, path: "/graphql" });
 };
