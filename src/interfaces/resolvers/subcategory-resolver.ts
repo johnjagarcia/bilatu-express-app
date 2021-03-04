@@ -35,8 +35,7 @@ export class SubcategoryResolver {
   @Mutation(() => Boolean)
   async updateSubcategoryImage(
     @Arg("id") id: string,
-    @Arg("file", () => GraphQLUpload, { nullable: true })
-    { mimetype, createReadStream }: Upload
+    @Arg("file", () => GraphQLUpload) { mimetype, createReadStream }: Upload
   ) {
     return await this.updateSubcategoryImageUseCase.execute(
       id,

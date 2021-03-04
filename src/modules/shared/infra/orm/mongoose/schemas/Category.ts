@@ -1,7 +1,9 @@
 import { Document, model, Schema } from "mongoose";
+import Blob from "./Blob";
 
 interface CategoryDocument extends Document {
   name: string;
+  blobId?: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -13,6 +15,10 @@ const categorySchema = new Schema({
     required: true,
     unique: true,
     trim: true,
+  },
+  blobId: {
+    type: Schema.Types.ObjectId,
+    ref: Blob,
   },
   active: {
     type: Boolean,

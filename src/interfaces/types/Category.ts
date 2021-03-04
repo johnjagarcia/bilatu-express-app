@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
+import Blob from "./Blob";
 
 @ObjectType()
 export default class Category {
@@ -7,6 +8,9 @@ export default class Category {
 
   @Field()
   name: string;
+
+  @Field({ name: "image", nullable: true })
+  blobId?: Blob;
 
   @Field()
   active: boolean;

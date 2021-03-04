@@ -49,6 +49,7 @@ import CategoryMongoRepository from "../modules/category/infra/CategoryMongoRepo
 import CreateCategory from "../modules/category/app/create-category";
 import GetCategories from "../modules/category/app/get-categories";
 import AssociateCategoriesToBusiness from "../modules/bussiness/app/associate-categories-to-business";
+import UpdateCategoryImage from "../modules/category/app/update-category-image";
 
 import { HeadquarterResolver } from "../interfaces/resolvers/headquarter-resolver";
 import HeadquarterRepository from "../modules/headquarter/domain/HeadquarterRepository";
@@ -167,6 +168,10 @@ myContainer
 myContainer
   .bind<AssociateCategoriesToBusiness>(AssociateCategoriesToBusiness)
   .to(AssociateCategoriesToBusiness)
+  .inSingletonScope();
+myContainer
+  .bind<UpdateCategoryImage>(UpdateCategoryImage)
+  .to(UpdateCategoryImage)
   .inSingletonScope();
 
 /* Headquarters */

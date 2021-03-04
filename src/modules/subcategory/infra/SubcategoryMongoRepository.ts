@@ -9,7 +9,10 @@ export default class SubcategoryMongoRepository
   async save(subcategory: Subcategory): Promise<Subcategory> {
     const subcategoryDocument = new SubcategoryDocument(subcategory);
     const savedSubcategory = await subcategoryDocument.save();
-    return savedSubcategory.populate("categoryId").execPopulate();
+    return savedSubcategory
+      .populate("categoryId")
+      .populate("blobId")
+      .execPopulate();
   }
 
   async getList(): Promise<Subcategory[]> {

@@ -13,8 +13,8 @@ export default class ProductCategory {
   @Field({ name: "subcategory" })
   subcategoryId: Subcategory;
 
-  @Field({ name: "image" })
-  blobId: Blob;
+  @Field({ name: "image", nullable: true })
+  blobId?: Blob;
 
   @Field()
   active: boolean;
