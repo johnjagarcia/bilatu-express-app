@@ -18,7 +18,7 @@ export default class HeadquarterMongoRepository
   }
 
   async getList(businessId: string): Promise<Headquarter[]> {
-    return await HeadquarterDocument.find({ businessId })
+    return await HeadquarterDocument.find({ businessId, active: true })
       .populate("cityId")
       .populate("coverageCities")
       .exec();

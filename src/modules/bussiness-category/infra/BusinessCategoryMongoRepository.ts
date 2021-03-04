@@ -15,7 +15,7 @@ export default class BusinessCategoryMongoRepository
   }
 
   async getList(): Promise<BusinessCategory[]> {
-    return await BusinessCategoryDocument.find();
+    return await BusinessCategoryDocument.find({ active: true });
   }
 
   async findByName(name: string): Promise<BusinessCategory | null> {

@@ -11,7 +11,7 @@ export default class BusinessMongoRepository implements BusinessRepository {
   }
 
   async getList(userId: string): Promise<Business[]> {
-    return await BusinessDocument.find({ userId })
+    return await BusinessDocument.find({ userId, active: true })
       .populate("cityId")
       .populate("userId")
       .populate("categoryId")

@@ -17,7 +17,7 @@ export default class ProductCategoryMongoRepository
   }
 
   async getList(): Promise<ProductCategory[]> {
-    return await ProductCategoryDocument.find()
+    return await ProductCategoryDocument.find({ active: true })
       .sort("name")
       .populate("subcategoryId")
       .populate("blobId")

@@ -12,7 +12,7 @@ export default class RoleMongoRepository implements RoleRepository {
   }
 
   async getList(): Promise<Role[]> {
-    return await RoleDocument.find();
+    return await RoleDocument.find({ active: true });
   }
 
   async findByCode(code: string): Promise<Role | null> {
