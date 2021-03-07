@@ -4,6 +4,7 @@ import Blob from "./Blob";
 interface CategoryDocument extends Document {
   name: string;
   blobId?: string;
+  type: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -13,12 +14,17 @@ const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   blobId: {
     type: Schema.Types.ObjectId,
     ref: Blob,
+  },
+  type: {
+    type: String,
+    enum: ["SERVICE", "PRODUCT"],
+    default: "PRODUCT",
+    required: true,
   },
   active: {
     type: Boolean,
@@ -34,5 +40,7 @@ const categorySchema = new Schema({
     default: Date.now,
   },
 });
+
+categorySchema.index({ name: 1, type: 1 }, { unique: true });
 
 export default model<CategoryDocument>("Category", categorySchema);

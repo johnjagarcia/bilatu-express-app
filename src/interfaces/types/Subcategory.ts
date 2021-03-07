@@ -17,6 +17,9 @@ export default class Subcategory {
   blobId?: Blob;
 
   @Field()
+  type: string;
+
+  @Field()
   active: boolean;
 
   @Field()

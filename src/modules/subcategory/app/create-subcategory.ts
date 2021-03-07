@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "../../../constants/types";
 import SubcategoryBuilder from "../domain/SubcategoryBuilder";
 import SubcategoryRepository from "../domain/SubcategoryRepository";
-import SubcategoryWithSameNameException from "../domain/SubcategoryNameException";
+import SubcategoryWithSameNameAndTypeException from "../domain/SubcategoryNameException";
 
 @injectable()
 export default class CreateSubcategory {
@@ -11,15 +11,16 @@ export default class CreateSubcategory {
     private repository: SubcategoryRepository
   ) {}
 
-  async execute(name: string, categoryId: string) {
-    if (await this.repository.findByName(name)) {
-      throw new SubcategoryWithSameNameException(
-        "Subcategory with same name already exists"
+  async execute(name: string, type: string, categoryId: string) {
+    if (await this.repository.findByNameAndType(name, type)) {
+      throw new SubcategoryWithSameNameAndTypeException(
+        "Subcategory with same name and type already exists"
       );
     }
 
     const subcategory = new SubcategoryBuilder()
       .with("name", name)
+      .with("type", type)
       .with("categoryId", categoryId)
       .build();
 

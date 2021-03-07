@@ -3,6 +3,7 @@ export default class Subcategory {
   name: string;
   categoryId: string;
   blobId?: string;
+  type: string;
   active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

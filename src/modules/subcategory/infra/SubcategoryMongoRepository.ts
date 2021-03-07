@@ -15,16 +15,19 @@ export default class SubcategoryMongoRepository
       .execPopulate();
   }
 
-  async getList(): Promise<Subcategory[]> {
-    return await SubcategoryDocument.find({ active: true })
+  async getList(type: string): Promise<Subcategory[]> {
+    return await SubcategoryDocument.find({ type, active: true })
       .sort("name")
       .populate("categoryId")
       .populate("blobId")
       .exec();
   }
 
-  async findByName(name: string): Promise<Subcategory | null> {
-    return await SubcategoryDocument.findOne({ name, active: true });
+  async findByNameAndType(
+    name: string,
+    type: string
+  ): Promise<Subcategory | null> {
+    return await SubcategoryDocument.findOne({ name, type });
   }
 
   async updateImage(_id: string, blobId: string): Promise<boolean> {

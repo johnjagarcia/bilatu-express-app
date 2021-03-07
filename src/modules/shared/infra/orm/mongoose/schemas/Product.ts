@@ -1,4 +1,5 @@
 import { Document, model, Schema } from "mongoose";
+import Blob from "./Blob";
 import Headquarter from "./Headquarter";
 import ProductCategory from "./ProductCategory";
 
@@ -12,6 +13,7 @@ interface ProductDocument extends Document {
   modelo: string;
   description: string;
   creationYear: string;
+  images?: string[];
   tags: string[];
   active: boolean;
   createdAt: Date;
@@ -86,6 +88,12 @@ const productSchema = new Schema({
     },
     set: (v: string | null) => (v === "" ? null : v),
   },
+  images: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: Blob,
+    },
+  ],
   tags: [
     {
       type: String,

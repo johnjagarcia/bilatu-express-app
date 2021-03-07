@@ -20,13 +20,13 @@ export class CategoryResolver {
   private updateCategoryImageUseCase: UpdateCategoryImage;
 
   @Mutation(() => Category)
-  async createCategory(@Arg("name") name: string) {
-    return await this.createCategoryUseCase.execute(name);
+  async createCategory(@Arg("name") name: string, @Arg("type") type: string) {
+    return await this.createCategoryUseCase.execute(name, type);
   }
 
   @Query(() => [Category])
-  async getCategories() {
-    return await this.getCategoriesUseCase.execute();
+  async getCategories(@Arg("type") type: string) {
+    return await this.getCategoriesUseCase.execute(type);
   }
 
   @Mutation(() => Boolean)

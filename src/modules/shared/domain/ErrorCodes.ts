@@ -6,9 +6,10 @@ export enum ErrorCodes {
   BusinessCategoryWithSameName = "BUSINESS_CATEGORY_WITH_SAME_NAME",
   CityWithSameCode = "CITY_WITH_SAME_CODE",
   BusinessWithSameNit = "BUSINESS_WITH_SAME_NIT",
-  SubcategoryWithSameName = "SUBCATEGORY_WITH_SAME_NAME",
-  CategoryWithSameName = "CATEGORY_WITH_SAME_NAME",
+  SubcategoryWithSameNameAndType = "SUBCATEGORY_WITH_SAME_NAME_AND_TYPE",
+  CategoryWithSameNameAndType = "CATEGORY_WITH_SAME_NAME_AND_TYPE",
   ExistingMainHeadquarter = "EXISTING_MAIN_HEADQUARTER",
   ProductCategoryWithSameName = "PRODUCT_CATEGORY_WITH_SAME_NAME",
   InvalidImage = "INVALID_FILE",
+  ServiceCategoryWithSameName = "SERVICE_CATEGORY_WITH_SAME_NAME",
 }

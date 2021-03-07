@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "../../../constants/types";
 import SubcategoryBuilder from "../domain/SubcategoryBuilder";
 import SubcategoryRepository from "../domain/SubcategoryRepository";
-import SubcategoryWithSameNameException from "../domain/SubcategoryNameException";
+import SubcategoryWithSameNameAndTypeException from "../domain/SubcategoryNameException";
 import CreateBlob from "../../blob/app/create-blob";
 import { Stream } from "stream";
 import SubcategoryInvalidImageException from "../../shared/domain/InvalidImageException";

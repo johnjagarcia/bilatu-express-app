@@ -11,14 +11,17 @@ export default class CategoryMongoRepository implements CategoryRepository {
     return savedCategory.populate("blobId").execPopulate();
   }
 
-  async getList(): Promise<Category[]> {
-    return await CategoryDocument.find({ active: true })
+  async getList(type: string): Promise<Category[]> {
+    return await CategoryDocument.find({ type, active: true })
       .populate("blobId")
       .exec();
   }
 
-  async findByName(name: string): Promise<Category | null> {
-    return await CategoryDocument.findOne({ name }).populate("blobId").exec();
+  async findByNameAndType(
+    name: string,
+    type: string
+  ): Promise<Category | null> {
+    return await CategoryDocument.findOne({ name, type });
   }
 
   async updateImage(_id: string, blobId: string): Promise<boolean> {

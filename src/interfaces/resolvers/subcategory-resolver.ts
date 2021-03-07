@@ -22,14 +22,15 @@ export class SubcategoryResolver {
   @Mutation(() => Subcategory)
   async createSubcategory(
     @Arg("name") name: string,
+    @Arg("type") type: string,
     @Arg("categoryid") categoryId: string
   ) {
-    return await this.createSubcategoryUseCase.execute(name, categoryId);
+    return await this.createSubcategoryUseCase.execute(name, type, categoryId);
   }
 
   @Query(() => [Subcategory])
-  async getSubcategories() {
-    return await this.getSubcategoriesUseCase.execute();
+  async getSubcategories(@Arg("type") type: string) {
+    return await this.getSubcategoriesUseCase.execute(type);
   }
 
   @Mutation(() => Boolean)

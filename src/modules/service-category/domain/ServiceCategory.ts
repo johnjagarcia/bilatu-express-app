@@ -1,8 +1,8 @@
-export default class Category {
+export default class ServiceCategory {
   _id?: string;
   name: string;
+  subcategoryId: string;
   blobId?: string;
-  type: string;
   active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

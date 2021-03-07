@@ -1,38 +1,31 @@
 import { Document, model, Schema } from "mongoose";
 import Blob from "./Blob";
-import Category from "./Category";
+import Subcategory from "./Subcategory";
 
-interface SubcategoryDocument extends Document {
+interface ServiceCategoryDocument extends Document {
   name: string;
-  categoryId: string;
-  blobId?: string;
-  type: string;
+  subcategoryId: string;
+  blobId: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const subcategorySchema = new Schema({
+const serviceCategoryTypeSchema = new Schema({
   name: {
     type: String,
     required: true,
     unique: true,
     trim: true,
   },
-  categoryId: {
+  subcategoryId: {
     type: Schema.Types.ObjectId,
-    ref: Category,
+    ref: Subcategory,
     required: true,
   },
   blobId: {
     type: Schema.Types.ObjectId,
     ref: Blob,
-  },
-  type: {
-    type: String,
-    enum: ["SERVICE", "PRODUCT"],
-    default: "PRODUCT",
-    required: true,
   },
   active: {
     type: Boolean,
@@ -49,6 +42,7 @@ const subcategorySchema = new Schema({
   },
 });
 
-subcategorySchema.index({ name: 1, type: 1 }, { unique: true });
-
-export default model<SubcategoryDocument>("Subcategory", subcategorySchema);
+export default model<ServiceCategoryDocument>(
+  "ServiceCategory",
+  serviceCategoryTypeSchema
+);
