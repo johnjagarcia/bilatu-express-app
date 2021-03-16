@@ -38,6 +38,8 @@ const startGraphqlServer = async (app: Application) => {
       globalMiddlewares: [ErrorInterceptor],
     }),
     uploads: false,
+    introspection: true,
+    playground: true,
   });
   app.use(graphqlUploadExpress({ maxFieldSize: 10000, maxFiles: 10 }));
 
