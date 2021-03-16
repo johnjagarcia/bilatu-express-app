@@ -111,9 +111,7 @@ const businessSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.parse(
-      new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" })
-    ),
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
