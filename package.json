@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon src/index.ts --exec ts-node",
+    "start": "nodemon src/index.ts --exec ts-node",
     "preinstall": "npx npm-force-resolutions",
     "build": "tsc --project ./"
   },
