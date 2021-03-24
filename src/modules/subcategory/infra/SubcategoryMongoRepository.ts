@@ -15,8 +15,8 @@ export default class SubcategoryMongoRepository
       .execPopulate();
   }
 
-  async getList(type: string): Promise<Subcategory[]> {
-    return await SubcategoryDocument.find({ type, active: true })
+  async getList(categoryId: string): Promise<Subcategory[]> {
+    return await SubcategoryDocument.find({ active: true, categoryId })
       .sort("name")
       .populate("categoryId")
       .populate("blobId")

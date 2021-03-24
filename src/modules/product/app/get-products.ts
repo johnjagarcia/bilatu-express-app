@@ -9,7 +9,23 @@ export default class GetProducts {
     private repository: ProductRepository
   ) {}
 
-  async execute(headquarterID: string) {
-    return this.repository.getList(headquarterID);
+  async execute(criteria?: string, subcategoryId?: string) {
+    const data = await this.repository.getList(criteria, subcategoryId);
+
+    const group = data.reduce((r, a) => {
+      r[a.headquarterId.name] = r[a.headquarterId.name] || [];
+      r[a.headquarterId.name].push(a);
+      return r;
+    }, {});
+
+    let list: any[] = [];
+    Object.entries(group).forEach(([key, value]) => {
+      list.push({
+        name: key,
+        data: value,
+      });
+    });
+
+    return list;
   }
 }

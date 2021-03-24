@@ -9,7 +9,7 @@ export default class GetSubcategories {
     private repository: SubcategoryRepository
   ) {}
 
-  async execute(type: string) {
-    return await this.repository.getList(type);
+  async execute(categoryId: string) {
+    return await this.repository.getList(categoryId);
   }
 }

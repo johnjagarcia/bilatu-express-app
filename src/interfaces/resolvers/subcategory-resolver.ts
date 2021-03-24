@@ -29,8 +29,8 @@ export class SubcategoryResolver {
   }
 
   @Query(() => [Subcategory])
-  async getSubcategories(@Arg("type") type: string) {
-    return await this.getSubcategoriesUseCase.execute(type);
+  async getSubcategories(@Arg("categoryid") categoryId: string) {
+    return await this.getSubcategoriesUseCase.execute(categoryId);
   }
 
   @Mutation(() => Boolean)

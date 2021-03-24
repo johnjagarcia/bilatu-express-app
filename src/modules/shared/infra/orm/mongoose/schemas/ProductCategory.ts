@@ -1,17 +1,19 @@
 import { Document, model, Schema } from "mongoose";
 import Blob from "./Blob";
+import Product from "./Product";
 import Subcategory from "./Subcategory";
 
 interface ProductCategoryDocument extends Document {
   name: string;
   subcategoryId: string;
+  products: string[];
   blobId: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const productCategoryTypeSchema = new Schema({
+const productCategorySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -44,5 +46,5 @@ const productCategoryTypeSchema = new Schema({
 
 export default model<ProductCategoryDocument>(
   "ProductCategory",
-  productCategoryTypeSchema
+  productCategorySchema
 );

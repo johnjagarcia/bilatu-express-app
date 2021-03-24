@@ -3,6 +3,7 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Product from "../types/Product";
 import CreateProduct from "../../modules/product/app/create-product";
 import GetProducts from "../../modules/product/app/get-products";
+import BusinessProductList from "../types/BusinessProductList";
 
 @injectable()
 @Resolver((of) => Product)
@@ -40,8 +41,11 @@ export class ProductResolver {
     );
   }
 
-  @Query(() => [Product])
-  async getProducts(@Arg("headquarterid") headquarterId: string) {
-    return await this.getProductsUseCase.execute(headquarterId);
+  @Query(() => [BusinessProductList])
+  async getProducts(
+    @Arg("criteria", { nullable: true }) criteria?: string,
+    @Arg("subcategoryid", { nullable: true }) subcategoryId?: string
+  ) {
+    return await this.getProductsUseCase.execute(criteria, subcategoryId);
   }
 }

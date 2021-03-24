@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
+import Business from "./Business";
 import City from "./City";
 
 @ObjectType()
@@ -11,6 +12,9 @@ export default class Headquarter {
 
   @Field()
   name: string;
+
+  @Field({ name: "business" })
+  businessId: Business;
 
   @Field()
   main: boolean;
