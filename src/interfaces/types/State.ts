@@ -10,7 +10,4 @@ export default class State {
 
   @Field()
   name: string;
-
-  @Field()
-  active: boolean;
 }

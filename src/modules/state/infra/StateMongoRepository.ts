@@ -6,6 +6,6 @@ import StateDocument from "../../shared/infra/orm/mongoose/schemas/State";
 @injectable()
 export default class StateMongoRepository implements StateRepository {
   async getList(): Promise<State[]> {
-    return await StateDocument.find({ active: true });
+    return await StateDocument.find();
   }
 }

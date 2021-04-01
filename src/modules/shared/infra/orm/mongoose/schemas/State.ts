@@ -18,11 +18,6 @@ const stateSchema = new Schema({
     required: true,
     trim: true,
   },
-  active: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
 });
 
 export default model<StateDocument>("State", stateSchema);
