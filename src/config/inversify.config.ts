@@ -74,6 +74,16 @@ import BlobRepository from "../modules/blob/domain/BlobRepository";
 import BlobMongoRepository from "../modules/blob/infra/BlobMongoRepository";
 import GetBlob from "../modules/blob/app/get-blob";
 
+import GetRoadTypes from "../modules/road-types/app/get-road-types";
+import { RoadTypeResolver } from "../interfaces/resolvers/road-type-resolver";
+import RoadTypeRepository from "../modules/road-types/domain/RoadTypeRepository";
+import RoadTypeMongoRepository from "../modules/road-types/infra/RoadTypeMongoRepository";
+
+import { CustomerResolver } from "../interfaces/resolvers/customer-resolver";
+import CustomerRepository from "../modules/customer/domain/CustomerRepository";
+import CustomerMongoRepository from "../modules/customer/infra/CustomerMongoRepository";
+import CreateCustomer from "../modules/customer/app/create-customer";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -88,6 +98,8 @@ myContainer.bind<CategoryResolver>(CategoryResolver).toSelf();
 myContainer.bind<HeadquarterResolver>(HeadquarterResolver).toSelf();
 myContainer.bind<ProductCategoryResolver>(ProductCategoryResolver).toSelf();
 myContainer.bind<ProductResolver>(ProductResolver).toSelf();
+myContainer.bind<RoadTypeResolver>(RoadTypeResolver).toSelf();
+myContainer.bind<CustomerResolver>(CustomerResolver).toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -214,5 +226,23 @@ myContainer.bind<GetProducts>(GetProducts).to(GetProducts).inSingletonScope();
 myContainer.bind<BlobRepository>(TYPES.BlobRepository).to(BlobMongoRepository);
 myContainer.bind<CreateBlob>(CreateBlob).to(CreateBlob).inSingletonScope();
 myContainer.bind<GetBlob>(GetBlob).to(GetBlob).inSingletonScope();
+
+/* Road Types */
+myContainer
+  .bind<RoadTypeRepository>(TYPES.RoadTypeRepository)
+  .to(RoadTypeMongoRepository);
+myContainer
+  .bind<GetRoadTypes>(GetRoadTypes)
+  .to(GetRoadTypes)
+  .inSingletonScope();
+
+/* Customer */
+myContainer
+  .bind<CustomerRepository>(TYPES.CustomerRepository)
+  .to(CustomerMongoRepository);
+myContainer
+  .bind<CreateCustomer>(CreateCustomer)
+  .to(CreateCustomer)
+  .inSingletonScope();
 
 export default myContainer;

@@ -25,8 +25,11 @@ export class CategoryResolver {
   }
 
   @Query(() => [Category])
-  async getCategories(@Arg("type") type: string) {
-    return await this.getCategoriesUseCase.execute(type);
+  async getCategories(
+    @Arg("type") type: string,
+    @Arg("onlyPopular", { nullable: true }) onlyPopular?: boolean
+  ) {
+    return await this.getCategoriesUseCase.execute(type, onlyPopular);
   }
 
   @Mutation(() => Boolean)

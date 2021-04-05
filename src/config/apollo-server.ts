@@ -16,6 +16,8 @@ import { HeadquarterResolver } from "../interfaces/resolvers/headquarter-resolve
 import { ProductCategoryResolver } from "../interfaces/resolvers/product-category-resolver";
 import { ProductResolver } from "../interfaces/resolvers/product-resolver";
 import { graphqlUploadExpress } from "graphql-upload";
+import { RoadTypeResolver } from "../interfaces/resolvers/road-type-resolver";
+import { CustomerResolver } from "../interfaces/resolvers/customer-resolver";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -33,6 +35,8 @@ const startGraphqlServer = async (app: Application) => {
         HeadquarterResolver,
         ProductCategoryResolver,
         ProductResolver,
+        RoadTypeResolver,
+        CustomerResolver,
       ],
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],

@@ -12,6 +12,8 @@ const TYPES = {
   ProductRepository: Symbol.for("ProductRepository"),
   BlobRepository: Symbol.for("BlobRepository"),
   ServiceCategoryRepository: Symbol.for("ServiceCategoryRepository"),
+  RoadTypeRepository: Symbol.for("RoadTypeRepository"),
+  CustomerRepository: Symbol.for("CustomerRepository"),
 };
 
 export { TYPES };

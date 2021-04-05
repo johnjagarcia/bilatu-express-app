@@ -9,7 +9,7 @@ export default class GetCategories {
     private repository: CategoryRepository
   ) {}
 
-  async execute(type: string) {
-    return await this.repository.getList(type);
+  async execute(type: string, onlyPopular?: boolean) {
+    return await this.repository.getList(type, onlyPopular);
   }
 }

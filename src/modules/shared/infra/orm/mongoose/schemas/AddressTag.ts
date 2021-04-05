@@ -1,34 +1,24 @@
 import { Document, model, Schema } from "mongoose";
 import Blob from "./Blob";
 
-interface CategoryDocument extends Document {
+interface AddressTagDocument extends Document {
   name: string;
-  blobId?: string;
-  type: string;
-  order?: number;
+  iconId?: string;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const categorySchema = new Schema({
+const addressTagSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
   },
-  blobId: {
+  iconId: {
     type: Schema.Types.ObjectId,
     ref: Blob,
-  },
-  type: {
-    type: String,
-    enum: ["SERVICE", "PRODUCT"],
-    default: "PRODUCT",
-    required: true,
-  },
-  order: {
-    type: Number,
   },
   active: {
     type: Boolean,
@@ -45,6 +35,4 @@ const categorySchema = new Schema({
   },
 });
 
-categorySchema.index({ name: 1, type: 1 }, { unique: true });
-
-export default model<CategoryDocument>("Category", categorySchema);
+export default model<AddressTagDocument>("AddressTag", addressTagSchema);

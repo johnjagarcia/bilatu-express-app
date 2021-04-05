@@ -1,14 +1,13 @@
-export default class User {
+export default class Customer {
   _id?: string;
   name: string;
   lastName: string;
-  email?: string;
-  cellphone?: string;
+  email: string;
+  cellphone: string;
   dni?: string;
-  password?: string;
-  rolId: string;
   birthDate?: Date;
   gender?: string;
+  addresses?: string[];
   active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

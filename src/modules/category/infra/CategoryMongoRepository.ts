@@ -11,8 +11,20 @@ export default class CategoryMongoRepository implements CategoryRepository {
     return savedCategory.populate("blobId").execPopulate();
   }
 
-  async getList(type: string): Promise<Category[]> {
+  async getList(type: string, onlyPopular?: boolean): Promise<Category[]> {
+    if (onlyPopular) {
+      return await CategoryDocument.find({
+        type,
+        active: true,
+        order: { $ne: undefined },
+      })
+        .populate("blobId")
+        .sort("order")
+        .exec();
+    }
+
     return await CategoryDocument.find({ type, active: true })
+      .sort("name")
       .populate("blobId")
       .exec();
   }
