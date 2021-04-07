@@ -20,7 +20,8 @@ export default class ProductMongoRepository implements ProductRepository {
     if (criteria) {
       console.log(`criteria`, criteria);
       return await ProductDocument.find({
-        $or: [{ title: { $regex: ".*" + criteria + ".*", $options: "i" } }],
+        title: { $regex: ".*" + criteria + ".*", $options: "i" },
+        /* $or: [{ title: { $regex: ".*" + criteria + ".*", $options: "i" } }], */
         active: true,
       })
         .populate("headquarterId")
