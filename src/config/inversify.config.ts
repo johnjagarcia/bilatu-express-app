@@ -84,6 +84,13 @@ import CustomerRepository from "../modules/customer/domain/CustomerRepository";
 import CustomerMongoRepository from "../modules/customer/infra/CustomerMongoRepository";
 import CreateCustomer from "../modules/customer/app/create-customer";
 
+import { BusinessCategoryGroupResolver } from "../interfaces/resolvers/business-category-group-resolver";
+import BusinessCategoryGroupMongoRepository from "../modules/business-category-group/infra/BusinessCategoryGroupMongoRepository";
+import CreateBusinessCategoryGroup from "../modules/business-category-group/app/create-business-category-group";
+import GetBusinessCategoriesGroup from "../modules/business-category-group/app/get-business-categories-group";
+import UpdateBusinessCategoryGroupImage from "../modules/business-category-group/app/update-business-category-group-image";
+import BusinessCategoryGroupRepository from "../modules/business-category-group/domain/BusinessCategoryGroupRepository";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -100,6 +107,9 @@ myContainer.bind<ProductCategoryResolver>(ProductCategoryResolver).toSelf();
 myContainer.bind<ProductResolver>(ProductResolver).toSelf();
 myContainer.bind<RoadTypeResolver>(RoadTypeResolver).toSelf();
 myContainer.bind<CustomerResolver>(CustomerResolver).toSelf();
+myContainer
+  .bind<BusinessCategoryGroupResolver>(BusinessCategoryGroupResolver)
+  .toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -243,6 +253,23 @@ myContainer
 myContainer
   .bind<CreateCustomer>(CreateCustomer)
   .to(CreateCustomer)
+  .inSingletonScope();
+
+/* Subcategories */
+myContainer
+  .bind<BusinessCategoryGroupRepository>(TYPES.BusinessCategoryGroupRepository)
+  .to(BusinessCategoryGroupMongoRepository);
+myContainer
+  .bind<CreateBusinessCategoryGroup>(CreateBusinessCategoryGroup)
+  .to(CreateBusinessCategoryGroup)
+  .inSingletonScope();
+myContainer
+  .bind<GetBusinessCategoriesGroup>(GetBusinessCategoriesGroup)
+  .to(GetBusinessCategoriesGroup)
+  .inSingletonScope();
+myContainer
+  .bind<UpdateBusinessCategoryGroupImage>(UpdateBusinessCategoryGroupImage)
+  .to(UpdateBusinessCategoryGroupImage)
   .inSingletonScope();
 
 export default myContainer;

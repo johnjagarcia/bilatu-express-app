@@ -1,19 +1,17 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../../constants/types";
-import SubcategoryBuilder from "../domain/SubcategoryBuilder";
-import SubcategoryRepository from "../domain/SubcategoryRepository";
-import SubcategoryWithSameNameAndTypeException from "../domain/SubcategoryNameException";
+import BusinessCategoryGroupRepository from "../domain/BusinessCategoryGroupRepository";
 import CreateBlob from "../../blob/app/create-blob";
 import { Stream } from "stream";
 import InvalidImageException from "../../shared/domain/InvalidImageException";
 
 @injectable()
-export default class UpdateSubcategoryImage {
+export default class UpdateBusinessCategoryGroupImage {
   constructor(
     @inject(CreateBlob)
     private createBlob: CreateBlob,
     @inject(TYPES.SubcategoryRepository)
-    private repository: SubcategoryRepository
+    private repository: BusinessCategoryGroupRepository
   ) {}
 
   async execute(_id: string, imageData: () => Stream, imageType: string) {
@@ -21,7 +19,7 @@ export default class UpdateSubcategoryImage {
       const blobId = await this.createBlob.execute(imageData, imageType);
       return await this.repository.updateImage(_id, blobId);
     } else {
-      throw new InvalidImageException("Subcategory invalid image file");
+      throw new InvalidImageException("Invalid image file");
     }
   }
 }

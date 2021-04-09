@@ -13,4 +13,5 @@ export enum ErrorCodes {
   InvalidImage = "INVALID_FILE",
   ServiceCategoryWithSameName = "SERVICE_CATEGORY_WITH_SAME_NAME",
   CustomerWithSameEmail = "CUSTOMER_WITH_SAME_EMAIL",
+  BusinessCategoryGroupWithSameName = "BUSINESS_CATEGORY_GROUP_WITH_SAME_NAME",
 }
