@@ -15,10 +15,20 @@ export default class BusinessCategoryMongoRepository
   }
 
   async getList(): Promise<BusinessCategory[]> {
-    return await BusinessCategoryDocument.find({ active: true });
+    return await BusinessCategoryDocument.find({ active: true })
+      .populate("blobId")
+      .exec();
   }
 
   async findByName(name: string): Promise<BusinessCategory | null> {
     return await BusinessCategoryDocument.findOne({ name });
+  }
+
+  async updateImage(_id: string, blobId: string): Promise<boolean> {
+    const response = await BusinessCategoryDocument.updateOne(
+      { _id },
+      { blobId }
+    );
+    return response.nModified === 1;
   }
 }

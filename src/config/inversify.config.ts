@@ -18,6 +18,7 @@ import BusinessCategoryRepository from "../modules/bussiness-category/domain/Bus
 import BusinessCategoryMongoRepository from "../modules/bussiness-category/infra/BusinessCategoryMongoRepository";
 import CreateBusinessCategory from "../modules/bussiness-category/app/create-business-category";
 import GetBusinessCategories from "../modules/bussiness-category/app/get-business-categories";
+import UpdateBusinessCategoryImage from "../modules/bussiness-category/app/update-business-category-image";
 
 import { StateResolver } from "../interfaces/resolvers/state-resolver";
 import StateRepository from "../modules/state/domain/StateRepository";
@@ -134,6 +135,11 @@ myContainer
 myContainer
   .bind<GetBusinessCategories>(GetBusinessCategories)
   .to(GetBusinessCategories)
+  .inSingletonScope();
+
+myContainer
+  .bind<UpdateBusinessCategoryImage>(UpdateBusinessCategoryImage)
+  .to(UpdateBusinessCategoryImage)
   .inSingletonScope();
 
 /* States */

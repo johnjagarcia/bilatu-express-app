@@ -24,7 +24,12 @@ export default class BusinessCategoryGroupMongoRepository
       active: true,
     })
       .sort("name")
-      .populate("businessCategories")
+      .populate({
+        path: "businessCategories",
+        populate: {
+          path: "blobId",
+        },
+      })
       .populate("blobId")
       .exec();
   }
