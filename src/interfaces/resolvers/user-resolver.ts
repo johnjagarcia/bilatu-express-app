@@ -20,15 +20,12 @@ export class UserResolver {
     @Arg("lastName") lastName: string,
     @Arg("password") password: string,
     @Arg("rolId") rolId: string,
-    @Arg("email", { nullable: true }) email?: string,
+    @Arg("email") email: string,
     @Arg("cellphone", { nullable: true }) cellphone?: string,
     @Arg("dni", { nullable: true }) dni?: string,
     @Arg("birthdate", { nullable: true }) birthdate?: Date,
-    @Arg("gender", { nullable: true }) gender?: string,
-    @Arg("file", () => GraphQLUpload, { nullable: true })
-    file?: FileUpload
+    @Arg("gender", { nullable: true }) gender?: string
   ) {
-    console.log("file", file);
     return await this.createUserUseCase.execute(
       name,
       lastName,

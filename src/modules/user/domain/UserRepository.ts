@@ -5,4 +5,5 @@ export default interface UserRepository {
   getOne(_id: string): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
   findByDni(email: string): Promise<User | null>;
+  findByEmailAndPassword(email: string, password: string): Promise<User | null>;
 }

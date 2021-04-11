@@ -92,6 +92,10 @@ import GetBusinessCategoriesGroup from "../modules/business-category-group/app/g
 import UpdateBusinessCategoryGroupImage from "../modules/business-category-group/app/update-business-category-group-image";
 import BusinessCategoryGroupRepository from "../modules/business-category-group/domain/BusinessCategoryGroupRepository";
 
+import { AuthResolver } from "../interfaces/resolvers/auth-resolver";
+import AuthenticateUser from "../modules/auth/app/AuthenticateUser";
+import { PingResolver } from "../interfaces/resolvers/ping";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -111,6 +115,8 @@ myContainer.bind<CustomerResolver>(CustomerResolver).toSelf();
 myContainer
   .bind<BusinessCategoryGroupResolver>(BusinessCategoryGroupResolver)
   .toSelf();
+myContainer.bind<AuthResolver>(AuthResolver).toSelf();
+myContainer.bind<PingResolver>(PingResolver).toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -276,6 +282,12 @@ myContainer
 myContainer
   .bind<UpdateBusinessCategoryGroupImage>(UpdateBusinessCategoryGroupImage)
   .to(UpdateBusinessCategoryGroupImage)
+  .inSingletonScope();
+
+/* Auth */
+myContainer
+  .bind<AuthenticateUser>(AuthenticateUser)
+  .to(AuthenticateUser)
   .inSingletonScope();
 
 export default myContainer;

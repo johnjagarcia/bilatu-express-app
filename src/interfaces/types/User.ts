@@ -21,9 +21,6 @@ export default class User {
   dni: string;
 
   @Field()
-  password: string;
-
-  @Field()
   rolId: string;
 
   @Field({ nullable: true })
