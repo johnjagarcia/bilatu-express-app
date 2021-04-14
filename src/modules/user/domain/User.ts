@@ -1,5 +1,5 @@
 export default class User {
-  _id?: string;
+  _id: string;
   name: string;
   lastName: string;
   email?: string;

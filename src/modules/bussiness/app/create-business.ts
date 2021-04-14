@@ -17,9 +17,9 @@ export default class CreateBusiness {
     nit: string,
     categoryId: string,
     type: string,
-    address: string,
     email: string,
     userId: string,
+    address?: string,
     cityId?: string,
     cellphone?: string,
     whatsapp?: string
@@ -33,7 +33,7 @@ export default class CreateBusiness {
     const business = new BusinessBuilder()
       .with("name", name)
       .with("categoryId", categoryId)
-      .with("address", address.toUpperCase())
+      .with("address", address?.toUpperCase())
       .with("cityId", cityId)
       .with("cellphone", cellphone)
       .with("userId", userId)

@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import Role from "./Role";
 
 interface UserDocument extends Document {
+  _id: string;
   name: string;
   lastName: string;
   email: string;

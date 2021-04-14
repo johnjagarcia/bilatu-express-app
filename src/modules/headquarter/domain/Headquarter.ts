@@ -10,8 +10,8 @@ export default class Headquarter {
   cityId: string;
   cellphone: string;
   whatsapp?: string;
-  email?: string;
-  coverageCities: string[];
+  email: string;
+  coverageCities?: string[];
   pickUpOnStore: boolean;
   homeDelivery: boolean;
   showLocation: boolean;

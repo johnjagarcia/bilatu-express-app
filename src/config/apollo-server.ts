@@ -23,6 +23,7 @@ import { AuthResolver } from "../interfaces/resolvers/auth-resolver";
 import { authChecker } from "../interfaces/middlewares/AuthChecker";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../constants/auth";
+import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -44,6 +45,7 @@ const startGraphqlServer = async (app: Application) => {
         CustomerResolver,
         BusinessCategoryGroupResolver,
         AuthResolver,
+        SignupBusinessOwnerResolver,
       ],
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],

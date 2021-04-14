@@ -90,7 +90,7 @@ const headquarterSchema = new Schema({
       trim: true,
       lowercase: true,
     },
-    set: (v: string | null) => (v === "" ? null : v),
+    required: true,
   },
   coverageCities: [
     {

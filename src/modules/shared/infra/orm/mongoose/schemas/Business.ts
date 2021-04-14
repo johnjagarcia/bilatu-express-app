@@ -6,6 +6,7 @@ import Subcategory from "./Subcategory";
 import User from "./User";
 
 interface BusinessDocument extends Document {
+  _id: string;
   code: string;
   name: string;
   type: string;

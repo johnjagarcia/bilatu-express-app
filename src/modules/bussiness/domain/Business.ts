@@ -1,5 +1,5 @@
 export default class Business {
-  _id?: string;
+  _id: string;
   code: string;
   type: string;
   name: string;

@@ -96,6 +96,9 @@ import { AuthResolver } from "../interfaces/resolvers/auth-resolver";
 import AuthenticateUser from "../modules/auth/app/AuthenticateUser";
 import { PingResolver } from "../interfaces/resolvers/ping";
 
+import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
+import RegisterBusinessOwner from "../modules/signup-owner/app/register-business-owner";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -117,6 +120,9 @@ myContainer
   .toSelf();
 myContainer.bind<AuthResolver>(AuthResolver).toSelf();
 myContainer.bind<PingResolver>(PingResolver).toSelf();
+myContainer
+  .bind<SignupBusinessOwnerResolver>(SignupBusinessOwnerResolver)
+  .toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -288,6 +294,12 @@ myContainer
 myContainer
   .bind<AuthenticateUser>(AuthenticateUser)
   .to(AuthenticateUser)
+  .inSingletonScope();
+
+/* Business Owner */
+myContainer
+  .bind<RegisterBusinessOwner>(RegisterBusinessOwner)
+  .to(RegisterBusinessOwner)
   .inSingletonScope();
 
 export default myContainer;

@@ -20,11 +20,11 @@ export default class CreateHeadquarter {
     pickUpOnStore: boolean,
     homeDelivery: boolean,
     showLocation: boolean,
-    coverageCities: string[],
     latitude: string,
     longitude: string,
-    whatsapp?: string,
-    email?: string
+    email: string,
+    coverageCities?: string[],
+    whatsapp?: string
   ) {
     const headquarter = new HeadquarterBuilder()
       .with("name", name)

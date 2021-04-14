@@ -14,13 +14,17 @@ export default class HeadquarterMongoRepository
         { main: false }
       );
     }
-    return headquarterDocument.save();
+    return (await headquarterDocument.save())
+      .populate("businessId")
+      .populate("cityId")
+      .execPopulate();
   }
 
   async getList(businessId: string): Promise<Headquarter[]> {
     return await HeadquarterDocument.find({ businessId, active: true })
       .populate("cityId")
       .populate("coverageCities")
+      .populate("businessId")
       .exec();
   }
 }
