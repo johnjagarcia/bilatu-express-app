@@ -26,7 +26,8 @@ export class HeadquarterResolver {
     @Arg("pickup_on_store") pickupOnStore: boolean,
     @Arg("home_delivery") homeDelivery: boolean,
     @Arg("show_location") showLocation: boolean,
-    @Arg("coverage_cities", () => [String]) coverageCities: [string],
+    @Arg("coverage_cities", () => [String], { nullable: true })
+    coverageCities: [string],
     @Arg("whatsapp", { nullable: true }) whatsapp?: string,
     @Arg("email", { nullable: true }) email?: string
   ) {
