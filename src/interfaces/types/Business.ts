@@ -21,22 +21,25 @@ export default class Business {
   @Field()
   address: string;
 
-  @Field({ name: "city" })
+  @Field({ name: "city", nullable: true })
   cityId: City;
 
   @Field({ name: "category" })
   categoryId: BusinessCategory;
 
-  @Field()
+  @Field({ nullable: true })
   cellphone: string;
 
   @Field({ nullable: true })
   whatsapp: string;
 
-  @Field({ nullable: true })
+  @Field()
   email: string;
 
-  @Field({ nullable: true })
+  @Field()
+  personType: string;
+
+  @Field()
   nit: string;
 
   @Field({ name: "user" })

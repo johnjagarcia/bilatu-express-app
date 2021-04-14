@@ -15,6 +15,7 @@ interface BusinessDocument extends Document {
   cellphone: string;
   whatsapp: string;
   email: string;
+  personType: string;
   nit: string;
   userId: string;
   subcategories: string[];
@@ -50,17 +51,14 @@ const businessSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
     trim: true,
   },
   cityId: {
     type: Schema.Types.ObjectId,
     ref: City,
-    required: true,
   },
   cellphone: {
     type: String,
-    required: true,
     trim: true,
   },
   whatsapp: {
@@ -74,24 +72,17 @@ const businessSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
-    index: {
-      unique: true,
-      partialFilterExpression: { email: { $type: "string" } },
-      trim: true,
-      lowercase: true,
-    },
-    set: (v: string | null) => (v === "" ? null : v),
+    required: true,
+  },
+  personType: {
+    type: String,
+    enum: ["NATURAL", "LEGAL"],
+    required: true,
   },
   nit: {
     type: String,
     lowercase: true,
-    index: {
-      unique: true,
-      partialFilterExpression: { nit: { $type: "string" } },
-      trim: true,
-      lowercase: true,
-    },
-    set: (v: string | null) => (v === "" ? null : v),
+    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,

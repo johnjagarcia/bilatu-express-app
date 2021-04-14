@@ -13,15 +13,16 @@ export default class CreateBusiness {
 
   async execute(
     name: string,
+    personType: string,
+    nit: string,
     categoryId: string,
+    type: string,
     address: string,
-    cityId: string,
-    cellphone: string,
+    email: string,
     userId: string,
-    whatsapp?: string,
-    email?: string,
-    nit?: string,
-    type?: string
+    cityId?: string,
+    cellphone?: string,
+    whatsapp?: string
   ) {
     if (nit && (await this.repository.findByNit(nit))) {
       throw new BusinessWithSameNitException(
@@ -38,6 +39,7 @@ export default class CreateBusiness {
       .with("userId", userId)
       .with("whatsapp", whatsapp)
       .with("email", email?.toLowerCase())
+      .with("personType", personType)
       .with("nit", nit)
       .with("type", type)
       .build();

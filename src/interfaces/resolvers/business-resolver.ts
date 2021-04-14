@@ -20,27 +20,29 @@ export class BusinessResolver {
   @Mutation(() => Business)
   async createBusiness(
     @Arg("name") name: string,
+    @Arg("person_type") personType: string,
+    @Arg("nit") nit: string,
     @Arg("categoryid") categoryId: string,
+    @Arg("type") type: string,
     @Arg("address") address: string,
-    @Arg("cityid") cityId: string,
-    @Arg("cellphone") cellphone: string,
+    @Arg("email") email: string,
     @Arg("userid") userId: string,
-    @Arg("whatsapp", { nullable: true }) whatsapp?: string,
-    @Arg("email", { nullable: true }) email?: string,
-    @Arg("nit", { nullable: true }) nit?: string,
-    @Arg("type", { nullable: true }) type?: string
+    @Arg("cityid", { nullable: true }) cityId?: string,
+    @Arg("cellphone", { nullable: true }) cellphone?: string,
+    @Arg("whatsapp", { nullable: true }) whatsapp?: string
   ) {
     return await this.createBusinessUseCase.execute(
       name,
+      personType,
+      nit,
       categoryId,
+      type,
       address,
+      email,
+      userId,
       cityId,
       cellphone,
-      userId,
-      whatsapp,
-      email,
-      nit,
-      type
+      whatsapp
     );
   }
 
