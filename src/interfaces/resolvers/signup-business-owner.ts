@@ -15,7 +15,6 @@ export class SignupBusinessOwnerResolver {
     @Arg("name") name: string,
     @Arg("lastName") lastName: string,
     @Arg("password") password: string,
-    @Arg("rolId") rolId: string,
     @Arg("email") email: string,
     @Arg("business_name") businessName: string,
     @Arg("person_type") personType: string,
@@ -41,7 +40,6 @@ export class SignupBusinessOwnerResolver {
     return await this.registerBusinessOwnerUseCase.execute(
       name,
       lastName,
-      rolId,
       password,
       email,
       businessName,

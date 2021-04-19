@@ -2,7 +2,6 @@ import { injectable } from "inversify";
 import Role from "../domain/Role";
 import RoleRepository from "../domain/RoleRepository";
 import RoleDocument from "../../shared/infra/orm/mongoose/schemas/Role";
-import RoleBuilder from "../domain/RoleBuilder";
 
 @injectable()
 export default class RoleMongoRepository implements RoleRepository {

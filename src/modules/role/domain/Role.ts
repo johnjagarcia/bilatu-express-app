@@ -1,5 +1,5 @@
 export default class Role {
-  _id?: string;
+  _id: string;
   code: string;
   name: string;
   active?: boolean;

@@ -11,7 +11,7 @@ export default class CityMongoRepository implements CityRepository {
   }
 
   async getList(stateId: string): Promise<City[]> {
-    return await CityDocument.find({ stateId, active: true });
+    return await CityDocument.find({ stateId, active: true }).sort("name");
   }
 
   async findByCode(code: string): Promise<City | null> {

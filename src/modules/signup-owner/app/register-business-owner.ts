@@ -1,10 +1,16 @@
 import { inject, injectable } from "inversify";
+import { ROLES } from "../../../constants/roles";
+import { TYPES } from "../../../constants/types";
 import CreateBusiness from "../../bussiness/app/create-business";
 import CreateHeadquarter from "../../headquarter/app/create-headquarter";
+import RoleRepository from "../../role/domain/RoleRepository";
 import CreateUser from "../../user/app/create-user";
+import RoleNotFoundWithGivenCode from "../domain/RoleNotFoundWithGivenCode";
 
 @injectable()
 export default class RegisterBusinessOwner {
+  @inject(TYPES.RoleRepository) private roleRepository: RoleRepository;
+
   @inject(CreateUser)
   private createUserUseCase: CreateUser;
 
@@ -17,7 +23,6 @@ export default class RegisterBusinessOwner {
   async execute(
     name: string,
     lastName: string,
-    rolId: string,
     password: string,
     email: string,
     businessName: string,
@@ -39,10 +44,16 @@ export default class RegisterBusinessOwner {
     headquarterWhatsapp?: string,
     userCellphone?: string
   ) {
+    const ownerRole = await this.roleRepository.findByCode(ROLES.Owner);
+    if (!ownerRole)
+      throw new RoleNotFoundWithGivenCode(
+        `No role found with ${ROLES.Owner} code`
+      );
+
     const user = await this.createUserUseCase.execute(
       name,
       lastName,
-      rolId,
+      ownerRole._id,
       password,
       email,
       userCellphone

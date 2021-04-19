@@ -15,4 +15,5 @@ export enum ErrorCodes {
   CustomerWithSameEmail = "CUSTOMER_WITH_SAME_EMAIL",
   BusinessCategoryGroupWithSameName = "BUSINESS_CATEGORY_GROUP_WITH_SAME_NAME",
   InvalidCredentials = "EMAIL_OR_PASSWORD_DOESNOT_MATCH",
+  RoleNotFound = "ROLE_NOT_FOUND",
 }

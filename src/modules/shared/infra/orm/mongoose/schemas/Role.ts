@@ -1,6 +1,7 @@
 import { Document, model, Schema } from "mongoose";
 
 interface RoleDocument extends Document {
+  _id: string;
   code: string;
   name: string;
   active: boolean;
