@@ -24,12 +24,8 @@ export class BusinessResolver {
     @Arg("nit") nit: string,
     @Arg("categoryid") categoryId: string,
     @Arg("type") type: string,
-    @Arg("address") address: string,
     @Arg("email") email: string,
-    @Arg("userid") userId: string,
-    @Arg("cityid", { nullable: true }) cityId?: string,
-    @Arg("cellphone", { nullable: true }) cellphone?: string,
-    @Arg("whatsapp", { nullable: true }) whatsapp?: string
+    @Arg("userid") userId: string
   ) {
     return await this.createBusinessUseCase.execute(
       name,
@@ -37,12 +33,8 @@ export class BusinessResolver {
       nit,
       categoryId,
       type,
-      address,
       email,
-      userId,
-      cityId,
-      cellphone,
-      whatsapp
+      userId
     );
   }
 

@@ -18,11 +18,7 @@ export default class CreateBusiness {
     categoryId: string,
     type: string,
     email: string,
-    userId: string,
-    address?: string,
-    cityId?: string,
-    cellphone?: string,
-    whatsapp?: string
+    userId: string
   ) {
     if (nit && (await this.repository.findByNit(nit))) {
       throw new BusinessWithSameNitException(
@@ -33,11 +29,7 @@ export default class CreateBusiness {
     const business = new BusinessBuilder()
       .with("name", name)
       .with("categoryId", categoryId)
-      .with("address", address?.toUpperCase())
-      .with("cityId", cityId)
-      .with("cellphone", cellphone)
       .with("userId", userId)
-      .with("whatsapp", whatsapp)
       .with("email", email?.toLowerCase())
       .with("personType", personType)
       .with("nit", nit)

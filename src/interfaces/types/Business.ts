@@ -18,9 +18,6 @@ export default class Business {
   @Field()
   name: string;
 
-  @Field()
-  address: string;
-
   @Field({ name: "city", nullable: true })
   cityId: City;
 

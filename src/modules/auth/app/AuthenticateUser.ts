@@ -21,7 +21,12 @@ export default class AuthenticateUser {
     }
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.rolId.code },
+      {
+        userId: user._id,
+        email: user.email,
+        role: user.rolId.code,
+        userName: `${user.name}`,
+      },
       JWT_SECRET,
       {
         expiresIn: "1h",
