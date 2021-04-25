@@ -41,4 +41,13 @@ export default class ProductMongoRepository implements ProductRepository {
       .populate("headquarterId")
       .exec();
   }
+
+  async getListByHeadquarter(headquarterId: string): Promise<Product[]> {
+    return await ProductDocument.find({
+      headquarterId,
+    })
+      .populate("productCategoryId")
+      .sort("title")
+      .exec();
+  }
 }

@@ -4,6 +4,7 @@ import Product from "../types/Product";
 import CreateProduct from "../../modules/product/app/create-product";
 import GetProducts from "../../modules/product/app/get-products";
 import BusinessProductList from "../types/BusinessProductList";
+import GetProductsByHeadquarter from "../../modules/product/app/get-products-by-headquarter";
 
 @injectable()
 @Resolver((of) => Product)
@@ -13,6 +14,9 @@ export class ProductResolver {
 
   @inject(GetProducts)
   private getProductsUseCase: GetProducts;
+
+  @inject(GetProductsByHeadquarter)
+  private getProductsByHeadquarterUseCase: GetProductsByHeadquarter;
 
   @Mutation(() => Product)
   async createProduct(
@@ -47,5 +51,10 @@ export class ProductResolver {
     @Arg("subcategoryid", { nullable: true }) subcategoryId?: string
   ) {
     return await this.getProductsUseCase.execute(criteria, subcategoryId);
+  }
+
+  @Query(() => [Product])
+  async getProductsByHeadquarter(@Arg("headquarterid") headquarterId: string) {
+    return await this.getProductsByHeadquarterUseCase.execute(headquarterId);
   }
 }

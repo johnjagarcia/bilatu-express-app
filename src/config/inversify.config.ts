@@ -69,6 +69,7 @@ import ProductRepository from "../modules/product/domain/ProductRepository";
 import ProductMongoRepository from "../modules/product/infra/ProductMongoRepository";
 import CreateProduct from "../modules/product/app/create-product";
 import GetProducts from "../modules/product/app/get-products";
+import GetProductsByHeadquarter from "../modules/product/app/get-products-by-headquarter";
 
 import CreateBlob from "../modules/blob/app/create-blob";
 import BlobRepository from "../modules/blob/domain/BlobRepository";
@@ -249,8 +250,12 @@ myContainer
   .to(CreateProduct)
   .inSingletonScope();
 myContainer.bind<GetProducts>(GetProducts).to(GetProducts).inSingletonScope();
+myContainer
+  .bind<GetProductsByHeadquarter>(GetProductsByHeadquarter)
+  .to(GetProductsByHeadquarter)
+  .inSingletonScope();
 
-/* Products */
+/* Blob */
 myContainer.bind<BlobRepository>(TYPES.BlobRepository).to(BlobMongoRepository);
 myContainer.bind<CreateBlob>(CreateBlob).to(CreateBlob).inSingletonScope();
 myContainer.bind<GetBlob>(GetBlob).to(GetBlob).inSingletonScope();
