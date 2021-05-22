@@ -10,7 +10,7 @@ export default class Product {
   @Field()
   title: string;
 
-  @Field({ name: "headquarter" })
+  @Field((type) => Headquarter, { name: "headquarter" })
   headquarterId: Headquarter;
 
   @Field({ name: "category" })
@@ -36,6 +36,9 @@ export default class Product {
 
   @Field((type) => [String], { nullable: true })
   tags: [string];
+
+  @Field()
+  price: number;
 
   @Field()
   active: boolean;

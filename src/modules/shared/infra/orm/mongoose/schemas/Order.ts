@@ -1,53 +1,44 @@
 import { Document, model, Schema } from "mongoose";
-import Blob from "./Blob";
+import Customer from "./Customer";
 import Headquarter from "./Headquarter";
-import ProductCategory from "./ProductCategory";
 
-interface ProductDocument extends Document {
-  title: string;
+interface OrderDocument extends Document {
+  customerId: string;
   headquarterId: string;
-  productCategoryId: string;
+  totalPrice: number;
   status: string;
-  warranty: string;
-  brand: string;
-  modelo: string;
-  description: string;
-  creationYear: string;
-  images?: string[];
-  tags: string[];
-  price: number;
-  active: boolean;
+  reasonId: string;
+  reasonObservation: string;
+  fleet: number;
+  deliveryDate: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const productSchema = new Schema({
-  title: {
-    type: String,
+  customerId: {
+    type: Schema.Types.ObjectId,
+    ref: Customer,
     required: true,
-    trim: true,
   },
   headquarterId: {
     type: Schema.Types.ObjectId,
     ref: Headquarter,
     required: true,
   },
-  productCategoryId: {
-    type: Schema.Types.ObjectId,
-    ref: ProductCategory,
-    required: true,
-  },
   status: {
     type: String,
     enum: [
       "NEW",
-      "LIKE_NEW",
-      "EXCELLENT",
-      "GOOD",
-      "ACCEPTABLE",
-      "RESTORED",
-      "FOR_RENTING",
-      "NA",
+      "CHECKING",
+      "TO_CONFIRM",
+      "CONFIRMED",
+      "SCHEDULED",
+      "ON_ROUTE",
+      "DELIVERED",
+      "CANCELLED_BY_COMMERCE",
+      "CANCELLED_BY_CUSTOMER",
+      "NOT_ANSWERED",
     ],
     default: "NEW",
     required: true,
@@ -120,4 +111,4 @@ const productSchema = new Schema({
   },
 });
 
-export default model<ProductDocument>("Product", productSchema);
+export default model<OrderDocument>("Product", productSchema);

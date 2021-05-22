@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import Business from "./Business";
 import City from "./City";
+import Product from "./Product";
 
 @ObjectType()
 export default class Headquarter {
@@ -60,4 +61,7 @@ export default class Headquarter {
 
   @Field()
   updatedAt: Date;
+
+  @Field((type) => [Product], { nullable: true })
+  products: Product[];
 }

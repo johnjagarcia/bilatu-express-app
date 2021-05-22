@@ -2,8 +2,6 @@ import { inject, injectable } from "inversify";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Product from "../types/Product";
 import CreateProduct from "../../modules/product/app/create-product";
-import GetProducts from "../../modules/product/app/get-products";
-import BusinessProductList from "../types/BusinessProductList";
 import GetProductsByHeadquarter from "../../modules/product/app/get-products-by-headquarter";
 
 @injectable()
@@ -11,9 +9,6 @@ import GetProductsByHeadquarter from "../../modules/product/app/get-products-by-
 export class ProductResolver {
   @inject(CreateProduct)
   private createProductUseCase: CreateProduct;
-
-  @inject(GetProducts)
-  private getProductsUseCase: GetProducts;
 
   @inject(GetProductsByHeadquarter)
   private getProductsByHeadquarterUseCase: GetProductsByHeadquarter;
@@ -27,6 +22,7 @@ export class ProductResolver {
     @Arg("warranty") warranty: string,
     @Arg("description") description: string,
     @Arg("tags", () => [String]) tags: [string],
+    @Arg("price") price: number,
     @Arg("brand", { nullable: true }) brand?: string,
     @Arg("modelo", { nullable: true }) modelo?: string,
     @Arg("creationYear", { nullable: true }) creationYear?: string
@@ -38,19 +34,12 @@ export class ProductResolver {
       status,
       warranty,
       description,
+      price,
       brand,
       modelo,
       creationYear,
       tags
     );
-  }
-
-  @Query(() => [BusinessProductList])
-  async getProducts(
-    @Arg("criteria", { nullable: true }) criteria?: string,
-    @Arg("subcategoryid", { nullable: true }) subcategoryId?: string
-  ) {
-    return await this.getProductsUseCase.execute(criteria, subcategoryId);
   }
 
   @Query(() => [Product])

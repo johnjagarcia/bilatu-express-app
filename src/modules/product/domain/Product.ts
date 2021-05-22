@@ -10,6 +10,7 @@ export default class Product {
   description: string;
   creationYear?: string;
   tags?: string[];
+  price: number;
   active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

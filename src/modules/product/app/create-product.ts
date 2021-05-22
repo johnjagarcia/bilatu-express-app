@@ -17,6 +17,7 @@ export default class CreateProduct {
     status: string,
     warranty: string,
     description: string,
+    price: number,
     brand?: string,
     modelo?: string,
     creationYear?: string,
@@ -33,6 +34,7 @@ export default class CreateProduct {
       .with("modelo", modelo)
       .with("creationYear", creationYear)
       .with("tags", tags)
+      .with("price", price)
       .build();
 
     return await this.repository.save(product);

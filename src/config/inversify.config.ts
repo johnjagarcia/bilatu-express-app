@@ -57,6 +57,8 @@ import HeadquarterRepository from "../modules/headquarter/domain/HeadquarterRepo
 import HeadquarterMongoRepository from "../modules/headquarter/infra/HeadquarterMongoRepository";
 import CreateHeadquarter from "../modules/headquarter/app/create-headquarter";
 import GetHeadquarters from "../modules/headquarter/app/get-headquarter";
+import GetHeadquartersWithProductsByCriteria from "../modules/headquarter/app/get-headquarters-with-products-by-criteria";
+import GetHeadquartersWithProductsBySubcategory from "../modules/headquarter/app/get-headquarters-with-products-by-subcategory";
 
 import { ProductCategoryResolver } from "../interfaces/resolvers/product-category-resolver";
 import ProductCategoryRepository from "../modules/product-category/domain/ProductCategoryRepository";
@@ -68,7 +70,6 @@ import { ProductResolver } from "../interfaces/resolvers/product-resolver";
 import ProductRepository from "../modules/product/domain/ProductRepository";
 import ProductMongoRepository from "../modules/product/infra/ProductMongoRepository";
 import CreateProduct from "../modules/product/app/create-product";
-import GetProducts from "../modules/product/app/get-products";
 import GetProductsByHeadquarter from "../modules/product/app/get-products-by-headquarter";
 
 import CreateBlob from "../modules/blob/app/create-blob";
@@ -227,6 +228,18 @@ myContainer
   .bind<GetHeadquarters>(GetHeadquarters)
   .to(GetHeadquarters)
   .inSingletonScope();
+myContainer
+  .bind<GetHeadquartersWithProductsByCriteria>(
+    GetHeadquartersWithProductsByCriteria
+  )
+  .to(GetHeadquartersWithProductsByCriteria)
+  .inSingletonScope();
+myContainer
+  .bind<GetHeadquartersWithProductsBySubcategory>(
+    GetHeadquartersWithProductsBySubcategory
+  )
+  .to(GetHeadquartersWithProductsBySubcategory)
+  .inSingletonScope();
 
 /* Product Categories */
 myContainer
@@ -249,7 +262,6 @@ myContainer
   .bind<CreateProduct>(CreateProduct)
   .to(CreateProduct)
   .inSingletonScope();
-myContainer.bind<GetProducts>(GetProducts).to(GetProducts).inSingletonScope();
 myContainer
   .bind<GetProductsByHeadquarter>(GetProductsByHeadquarter)
   .to(GetProductsByHeadquarter)
