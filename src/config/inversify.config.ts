@@ -101,6 +101,18 @@ import { PingResolver } from "../interfaces/resolvers/ping";
 import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
 import RegisterBusinessOwner from "../modules/signup-owner/app/register-business-owner";
 
+import { CartResolver } from "../interfaces/resolvers/cart-resolver";
+import CartRepository from "../modules/cart/domain/CartRepository";
+import CartMongoRepository from "../modules/cart/infra/CartMongoRepository";
+import UpdateCart from "../modules/cart/app/update-cart";
+import GetCart from "../modules/cart/app/get-cart";
+
+import { ProductItemResolver } from "../interfaces/resolvers/product-item-resolver";
+import ProductItemRepository from "../modules/product-item/domain/ProductItemRepository";
+import ProductItemMongoRepository from "../modules/product-item/infra/ProductItemRepository";
+import UpdateProductItem from "../modules/product-item/app/update-product-item";
+import DeleteProductItem from "../modules/product-item/app/delete-product-item";
+
 const myContainer = new Container();
 
 /* Resolvers */
@@ -125,6 +137,8 @@ myContainer.bind<PingResolver>(PingResolver).toSelf();
 myContainer
   .bind<SignupBusinessOwnerResolver>(SignupBusinessOwnerResolver)
   .toSelf();
+myContainer.bind<CartResolver>(CartResolver).toSelf();
+myContainer.bind<ProductItemResolver>(ProductItemResolver).toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -317,6 +331,24 @@ myContainer
 myContainer
   .bind<RegisterBusinessOwner>(RegisterBusinessOwner)
   .to(RegisterBusinessOwner)
+  .inSingletonScope();
+
+/* Cart */
+myContainer.bind<CartRepository>(TYPES.CartRepository).to(CartMongoRepository);
+myContainer.bind<UpdateCart>(UpdateCart).to(UpdateCart).inSingletonScope();
+myContainer.bind<GetCart>(GetCart).to(GetCart).inSingletonScope();
+
+/* ProductItem */
+myContainer
+  .bind<ProductItemRepository>(TYPES.ProductItemRepository)
+  .to(ProductItemMongoRepository);
+myContainer
+  .bind<UpdateProductItem>(UpdateProductItem)
+  .to(UpdateProductItem)
+  .inSingletonScope();
+myContainer
+  .bind<DeleteProductItem>(DeleteProductItem)
+  .to(DeleteProductItem)
   .inSingletonScope();
 
 export default myContainer;

@@ -26,4 +26,8 @@ export default class ProductMongoRepository implements ProductRepository {
       .sort("title")
       .exec();
   }
+
+  async getById(_id: string): Promise<Product | null> {
+    return await ProductDocument.findById(_id);
+  }
 }

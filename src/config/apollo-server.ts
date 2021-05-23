@@ -19,11 +19,15 @@ import { graphqlUploadExpress } from "graphql-upload";
 import { RoadTypeResolver } from "../interfaces/resolvers/road-type-resolver";
 import { CustomerResolver } from "../interfaces/resolvers/customer-resolver";
 import { BusinessCategoryGroupResolver } from "../interfaces/resolvers/business-category-group-resolver";
+import { CartResolver } from "../interfaces/resolvers/cart-resolver";
+
 import { AuthResolver } from "../interfaces/resolvers/auth-resolver";
 import { authChecker } from "../interfaces/middlewares/AuthChecker";
+
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../constants/auth";
 import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
+import { ProductItemResolver } from "../interfaces/resolvers/product-item-resolver";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -46,6 +50,8 @@ const startGraphqlServer = async (app: Application) => {
         BusinessCategoryGroupResolver,
         AuthResolver,
         SignupBusinessOwnerResolver,
+        CartResolver,
+        ProductItemResolver,
       ],
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],

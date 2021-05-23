@@ -13,7 +13,6 @@ export default class CreateBusinessCategory {
 
   async execute(name: string) {
     if (await this.repository.findByName(name)) {
-      console.log("llego aquii");
       throw new BusinessCategoryWithSameNameException(
         "Business category with same name already exists"
       );
