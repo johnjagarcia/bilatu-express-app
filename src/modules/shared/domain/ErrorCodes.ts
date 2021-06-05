@@ -16,6 +16,6 @@ export enum ErrorCodes {
   BusinessCategoryGroupWithSameName = "BUSINESS_CATEGORY_GROUP_WITH_SAME_NAME",
   InvalidCredentials = "EMAIL_OR_PASSWORD_DOESNOT_MATCH",
   RoleNotFound = "ROLE_NOT_FOUND",
-  ProductItemNotFound = "PRODUCT_ITEM_NOT_FOUND",
+  CartItemNotFound = "CART_ITEM_NOT_FOUND",
   ProductNotFound = "PRODUCT_NOT_FOUND",
 }

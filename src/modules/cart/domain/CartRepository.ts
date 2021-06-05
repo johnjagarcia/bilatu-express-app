@@ -1,11 +1,16 @@
 import Cart from "./Cart";
-import ProductItem from "../../product-item/domain/ProductItem";
+import CartItem from "../../cart-item/domain/CartItem";
 
 export default interface CartRepository {
-  update(customerId: string, productItem: ProductItem): Promise<Cart>;
-  getOrCreate(customerId: string): Promise<Cart>;
+  update(
+    customerId: string,
+    headquarterId: string,
+    cartItem: CartItem
+  ): Promise<Cart[]>;
+  getCarts(customerId: string): Promise<Cart[]>;
   getExistingItem(
     customerId: string,
+    headquarterId: string,
     productId: string
-  ): Promise<ProductItem | null>;
+  ): Promise<CartItem | null>;
 }

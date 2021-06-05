@@ -1,7 +1,7 @@
 import { Document, model, Schema } from "mongoose";
 import Product from "./Product";
 
-interface ProductItemDocument extends Document {
+interface CartItemDocument extends Document {
   productId: string;
   quantity: number;
   price: number;
@@ -11,7 +11,7 @@ interface ProductItemDocument extends Document {
   updatedAt: Date;
 }
 
-const productItemSchema = new Schema({
+const cartItemSchema = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
     ref: Product,
@@ -46,4 +46,4 @@ const productItemSchema = new Schema({
   },
 });
 
-export default model<ProductItemDocument>("ProductItem", productItemSchema);
+export default model<CartItemDocument>("CartItem", cartItemSchema);

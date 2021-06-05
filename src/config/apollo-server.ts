@@ -27,7 +27,7 @@ import { authChecker } from "../interfaces/middlewares/AuthChecker";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../constants/auth";
 import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
-import { ProductItemResolver } from "../interfaces/resolvers/product-item-resolver";
+import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
 
 const startGraphqlServer = async (app: Application) => {
   const server = new ApolloServer({
@@ -51,7 +51,7 @@ const startGraphqlServer = async (app: Application) => {
         AuthResolver,
         SignupBusinessOwnerResolver,
         CartResolver,
-        ProductItemResolver,
+        CartItemResolver,
       ],
       container: myContainer,
       globalMiddlewares: [ErrorInterceptor],

@@ -18,7 +18,7 @@ const TYPES = {
     "BusinessCategoryGroupRepository"
   ),
   CartRepository: Symbol.for("CartRepository"),
-  ProductItemRepository: Symbol.for("ProductItemRepository"),
+  CartItemRepository: Symbol.for("CartItemRepository"),
 };
 
 export { TYPES };

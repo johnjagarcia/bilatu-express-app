@@ -1,13 +1,13 @@
 import { Document, model, Schema } from "mongoose";
 import Customer from "./Customer";
 import Headquarter from "./Headquarter";
-import ProductItem from "./ProductItem";
+import CartItem from "./CartItem";
 import Reason from "./Reason";
 
 interface OrderDocument extends Document {
   customerId: string;
   headquarterId: string;
-  productItems: string[];
+  cartItems: string[];
   status: string;
   reasonId: string;
   reasonObservation: string;
@@ -28,10 +28,10 @@ const orderSchema = new Schema({
     ref: Headquarter,
     required: true,
   },
-  productItems: [
+  cartItems: [
     {
       type: Schema.Types.ObjectId,
-      ref: ProductItem,
+      ref: CartItem,
     },
   ],
   status: {

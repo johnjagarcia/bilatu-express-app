@@ -107,11 +107,11 @@ import CartMongoRepository from "../modules/cart/infra/CartMongoRepository";
 import UpdateCart from "../modules/cart/app/update-cart";
 import GetCart from "../modules/cart/app/get-cart";
 
-import { ProductItemResolver } from "../interfaces/resolvers/product-item-resolver";
-import ProductItemRepository from "../modules/product-item/domain/ProductItemRepository";
-import ProductItemMongoRepository from "../modules/product-item/infra/ProductItemRepository";
-import UpdateProductItem from "../modules/product-item/app/update-product-item";
-import DeleteProductItem from "../modules/product-item/app/delete-product-item";
+import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
+import CartItemRepository from "../modules/cart-item/domain/CartItemRepository";
+import CartItemMongoRepository from "../modules/cart-item/infra/CartItemRepository";
+import UpdateCartItem from "../modules/cart-item/app/update-cart-item";
+import DeleteCartItem from "../modules/cart-item/app/delete-cart-item";
 
 const myContainer = new Container();
 
@@ -138,7 +138,7 @@ myContainer
   .bind<SignupBusinessOwnerResolver>(SignupBusinessOwnerResolver)
   .toSelf();
 myContainer.bind<CartResolver>(CartResolver).toSelf();
-myContainer.bind<ProductItemResolver>(ProductItemResolver).toSelf();
+myContainer.bind<CartItemResolver>(CartItemResolver).toSelf();
 
 /* Roles */
 myContainer.bind<RoleRepository>(TYPES.RoleRepository).to(RoleMongoRepository);
@@ -338,17 +338,17 @@ myContainer.bind<CartRepository>(TYPES.CartRepository).to(CartMongoRepository);
 myContainer.bind<UpdateCart>(UpdateCart).to(UpdateCart).inSingletonScope();
 myContainer.bind<GetCart>(GetCart).to(GetCart).inSingletonScope();
 
-/* ProductItem */
+/* Cart Item */
 myContainer
-  .bind<ProductItemRepository>(TYPES.ProductItemRepository)
-  .to(ProductItemMongoRepository);
+  .bind<CartItemRepository>(TYPES.CartItemRepository)
+  .to(CartItemMongoRepository);
 myContainer
-  .bind<UpdateProductItem>(UpdateProductItem)
-  .to(UpdateProductItem)
+  .bind<UpdateCartItem>(UpdateCartItem)
+  .to(UpdateCartItem)
   .inSingletonScope();
 myContainer
-  .bind<DeleteProductItem>(DeleteProductItem)
-  .to(DeleteProductItem)
+  .bind<DeleteCartItem>(DeleteCartItem)
+  .to(DeleteCartItem)
   .inSingletonScope();
 
 export default myContainer;

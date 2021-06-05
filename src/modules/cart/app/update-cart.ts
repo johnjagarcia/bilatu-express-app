@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../../constants/types";
-import ProductItem from "../../product-item/domain/ProductItem";
-import ProductItemRepository from "../../product-item/domain/ProductItemRepository";
+import CartItemRepository from "../../cart-item/domain/CartItemRepository";
 import ProductNotFoundException from "../../product/domain/ProductNotFoundException";
 import ProductRepository from "../../product/domain/ProductRepository";
 import CartRepository from "../domain/CartRepository";
@@ -9,14 +8,19 @@ import CartRepository from "../domain/CartRepository";
 @injectable()
 export default class UpdateCart {
   constructor(
-    @inject(TYPES.ProductItemRepository)
-    private productItemRepository: ProductItemRepository,
+    @inject(TYPES.CartItemRepository)
+    private cartItemRepository: CartItemRepository,
     @inject(TYPES.ProductRepository)
     private productRepository: ProductRepository,
     @inject(TYPES.CartRepository) private repository: CartRepository
   ) {}
 
-  async execute(customerId: string, productId: string, quantity: number) {
+  async execute(
+    customerId: string,
+    headquarterId: string,
+    productId: string,
+    quantity: number
+  ) {
     const product = await this.productRepository.getById(productId);
     if (!product)
       throw new ProductNotFoundException(
@@ -25,26 +29,31 @@ export default class UpdateCart {
 
     const existingItem = await this.repository.getExistingItem(
       customerId,
+      headquarterId,
       productId
     );
 
     if (existingItem && existingItem._id) {
-      await this.productItemRepository.update(
+      await this.cartItemRepository.update(
         existingItem._id,
         quantity,
         product.price
       );
     } else {
-      const createdProductItem = await this.productItemRepository.save({
+      const createdItem = await this.cartItemRepository.save({
         productId,
         quantity,
         price: product.price,
         total: quantity * product.price,
       });
 
-      return await this.repository.update(customerId, createdProductItem);
+      return await this.repository.update(
+        customerId,
+        headquarterId,
+        createdItem
+      );
     }
 
-    return await this.repository.getOrCreate(customerId);
+    return await this.repository.getCarts(customerId);
   }
 }

@@ -9,6 +9,6 @@ export default class GetCart {
   ) {}
 
   async execute(customerId: string) {
-    return await this.repository.getOrCreate(customerId);
+    return await this.repository.getCarts(customerId);
   }
 }

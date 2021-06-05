@@ -2,53 +2,65 @@ import { injectable } from "inversify";
 import Cart from "../domain/Cart";
 import CartRepository from "../domain/CartRepository";
 import CartDocument from "../../shared/infra/orm/mongoose/schemas/Cart";
-import ProductItem from "../../product-item/domain/ProductItem";
+import CartItem from "../../cart-item/domain/CartItem";
 
 @injectable()
 export default class CartMongoRepository implements CartRepository {
-  async update(customerId: string, productItem: ProductItem): Promise<Cart> {
-    const cart = await this.getOrCreate(customerId);
-
+  async update(
+    customerId: string,
+    headquarterId: string,
+    cartItem: CartItem
+  ): Promise<Cart[]> {
     await CartDocument.updateOne(
-      { _id: cart._id },
-      { $push: { productItems: productItem._id }, updatedAt: new Date() }
+      { customerId, headquarterId },
+      {
+        $push: { cartItems: cartItem._id },
+        customerId,
+        headquarterId,
+        updatedAt: new Date(),
+      },
+      { upsert: true, setDefaultsOnInsert: true }
     );
 
-    return await this.getOrCreate(customerId);
+    return await this.getCarts(customerId);
   }
 
-  async getOrCreate(customerId: string): Promise<Cart> {
-    const cart = await CartDocument.findOne({ customerId })
+  async getCarts(customerId: string): Promise<Cart[]> {
+    const carts = await CartDocument.find({ customerId })
       .populate({
-        path: "productItems",
+        path: "cartItems",
+        populate: {
+          path: "productId",
+        },
+      })
+      .populate({
+        path: "headquarterId",
+      })
+      .exec();
+
+    return carts;
+  }
+
+  async getExistingItem(
+    customerId: string,
+    headquarterId: string,
+    productId: string
+  ): Promise<CartItem | null> {
+    const cart: any = await CartDocument.findOne({
+      customerId,
+      headquarterId,
+    })
+      .populate({
+        path: "cartItems",
         populate: {
           path: "productId",
         },
       })
       .exec();
 
-    if (!cart) {
-      const savedCart = await new CartDocument({ customerId }).save();
-      return savedCart
-        .populate({
-          path: "productItems",
-          populate: {
-            path: "productId",
-          },
-        })
-        .execPopulate();
-    }
+    if (!cart) return null;
 
-    return cart;
-  }
-
-  async getExistingItem(
-    customerId: string,
-    productId: string
-  ): Promise<ProductItem | null> {
-    const cart: any = await this.getOrCreate(customerId);
-
-    const item: ProductItem = cart.productItems.find((item: any) => {
+    const item: CartItem = cart.cartItems.find((item: any) => {
       return item.productId._id.toString() === productId;
     });
 

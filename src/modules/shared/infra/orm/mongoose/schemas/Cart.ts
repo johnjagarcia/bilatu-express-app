@@ -1,10 +1,12 @@
 import { Document, model, Schema } from "mongoose";
 import Customer from "./Customer";
-import ProductItem from "./ProductItem";
+import Headquarter from "./Headquarter";
+import CartItem from "./CartItem";
 
 interface CartDocument extends Document {
   customerId: string;
-  productItems: string[];
+  headquarterId: string;
+  cartItems: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -13,13 +15,17 @@ const cartSchema = new Schema({
   customerId: {
     type: Schema.Types.ObjectId,
     ref: Customer,
-    unique: true,
     required: true,
   },
-  productItems: [
+  headquarterId: {
+    type: Schema.Types.ObjectId,
+    ref: Headquarter,
+    required: true,
+  },
+  cartItems: [
     {
       type: Schema.Types.ObjectId,
-      ref: ProductItem,
+      ref: CartItem,
     },
   ],
   createdAt: {
@@ -31,5 +37,7 @@ const cartSchema = new Schema({
     default: Date.now,
   },
 });
+
+cartSchema.index({ customerId: 1, headquarterId: 1 }, { unique: true });
 
 export default model<CartDocument>("Cart", cartSchema);

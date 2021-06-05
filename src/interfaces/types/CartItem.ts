@@ -2,7 +2,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 import Product from "./Product";
 
 @ObjectType()
-export default class ProductItem {
+export default class CartItem {
   @Field(() => ID)
   _id: string;
 
@@ -18,7 +18,7 @@ export default class ProductItem {
   @Field()
   total: number;
 
-  @Field()
+  @Field({ nullable: true })
   observations: string;
 
   @Field()
