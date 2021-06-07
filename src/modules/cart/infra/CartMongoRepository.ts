@@ -66,4 +66,9 @@ export default class CartMongoRepository implements CartRepository {
 
     return item;
   }
+
+  async deleteById(_id: string): Promise<boolean> {
+    const deletedItem = await CartDocument.deleteOne({ _id });
+    return deletedItem.deletedCount >= 1;
+  }
 }

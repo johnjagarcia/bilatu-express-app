@@ -3,6 +3,7 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import GetCart from "../../modules/cart/app/get-cart";
 import Cart from "../types/Cart";
 import UpdateCart from "../../modules/cart/app/update-cart";
+import DeleteCart from "../../modules/cart/app/delete-cart";
 
 @injectable()
 @Resolver((of) => Cart)
@@ -12,6 +13,9 @@ export class CartResolver {
 
   @inject(GetCart)
   private getCartUseCase: GetCart;
+
+  @inject(DeleteCart)
+  private deleteCartUseCase: DeleteCart;
 
   @Mutation(() => [Cart])
   async updateCart(
@@ -31,5 +35,10 @@ export class CartResolver {
   @Query(() => [Cart])
   async getCart(@Arg("customerid") customerId: string) {
     return await this.getCartUseCase.execute(customerId);
+  }
+
+  @Mutation(() => Boolean)
+  async deleteCart(@Arg("id") id: string) {
+    return await this.deleteCartUseCase.execute(id);
   }
 }

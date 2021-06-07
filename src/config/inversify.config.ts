@@ -106,6 +106,7 @@ import CartRepository from "../modules/cart/domain/CartRepository";
 import CartMongoRepository from "../modules/cart/infra/CartMongoRepository";
 import UpdateCart from "../modules/cart/app/update-cart";
 import GetCart from "../modules/cart/app/get-cart";
+import DeleteCart from "../modules/cart/app/delete-cart";
 
 import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
 import CartItemRepository from "../modules/cart-item/domain/CartItemRepository";
@@ -337,6 +338,7 @@ myContainer
 myContainer.bind<CartRepository>(TYPES.CartRepository).to(CartMongoRepository);
 myContainer.bind<UpdateCart>(UpdateCart).to(UpdateCart).inSingletonScope();
 myContainer.bind<GetCart>(GetCart).to(GetCart).inSingletonScope();
+myContainer.bind<DeleteCart>(DeleteCart).to(DeleteCart).inSingletonScope();
 
 /* Cart Item */
 myContainer
