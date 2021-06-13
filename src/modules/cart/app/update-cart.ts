@@ -15,12 +15,7 @@ export default class UpdateCart {
     @inject(TYPES.CartRepository) private repository: CartRepository
   ) {}
 
-  async execute(
-    customerId: string,
-    headquarterId: string,
-    productId: string,
-    quantity: number
-  ) {
+  async execute(customerId: string, productId: string, quantity: number) {
     const product = await this.productRepository.getById(productId);
     if (!product)
       throw new ProductNotFoundException(
@@ -29,7 +24,7 @@ export default class UpdateCart {
 
     const existingItem = await this.repository.getExistingItem(
       customerId,
-      headquarterId,
+      product.headquarterId,
       productId
     );
 
@@ -49,7 +44,7 @@ export default class UpdateCart {
 
       return await this.repository.update(
         customerId,
-        headquarterId,
+        product.headquarterId,
         createdItem
       );
     }

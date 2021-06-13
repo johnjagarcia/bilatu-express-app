@@ -107,12 +107,12 @@ import CartMongoRepository from "../modules/cart/infra/CartMongoRepository";
 import UpdateCart from "../modules/cart/app/update-cart";
 import GetCart from "../modules/cart/app/get-cart";
 import DeleteCart from "../modules/cart/app/delete-cart";
+import DeleteCartItem from "../modules/cart/app/delete-cart-item";
 
 import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
 import CartItemRepository from "../modules/cart-item/domain/CartItemRepository";
 import CartItemMongoRepository from "../modules/cart-item/infra/CartItemRepository";
 import UpdateCartItem from "../modules/cart-item/app/update-cart-item";
-import DeleteCartItem from "../modules/cart-item/app/delete-cart-item";
 
 const myContainer = new Container();
 
@@ -339,6 +339,10 @@ myContainer.bind<CartRepository>(TYPES.CartRepository).to(CartMongoRepository);
 myContainer.bind<UpdateCart>(UpdateCart).to(UpdateCart).inSingletonScope();
 myContainer.bind<GetCart>(GetCart).to(GetCart).inSingletonScope();
 myContainer.bind<DeleteCart>(DeleteCart).to(DeleteCart).inSingletonScope();
+myContainer
+  .bind<DeleteCartItem>(DeleteCartItem)
+  .to(DeleteCartItem)
+  .inSingletonScope();
 
 /* Cart Item */
 myContainer
@@ -347,10 +351,6 @@ myContainer
 myContainer
   .bind<UpdateCartItem>(UpdateCartItem)
   .to(UpdateCartItem)
-  .inSingletonScope();
-myContainer
-  .bind<DeleteCartItem>(DeleteCartItem)
-  .to(DeleteCartItem)
   .inSingletonScope();
 
 export default myContainer;

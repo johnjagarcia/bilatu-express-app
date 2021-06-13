@@ -29,7 +29,11 @@ export default class CartItemMongoRepository implements CartItemRepository {
   }
 
   async getById(_id: string): Promise<CartItem | null> {
-    return await CartItemDocument.findById(_id);
+    return await CartItemDocument.findById(_id)
+      .populate({
+        path: "productId",
+      })
+      .exec();
   }
 
   async deleteById(_id: string): Promise<boolean> {

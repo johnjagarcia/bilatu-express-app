@@ -17,4 +17,9 @@ export default interface CartRepository {
   ): Promise<CartItem | null>;
 
   deleteById(id: string): Promise<boolean>;
+
+  getCartByHeadquarterId(
+    customerId: string,
+    headquarterId: string
+  ): Promise<Cart | null>;
 }
