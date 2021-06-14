@@ -28,35 +28,44 @@ import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../constants/auth";
 import { SignupBusinessOwnerResolver } from "../interfaces/resolvers/signup-business-owner";
 import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
+import { createServer } from "http";
+import { SubscriptionServer } from "subscriptions-transport-ws";
+import { execute, subscribe } from "graphql";
 
 const startGraphqlServer = async (app: Application) => {
-  const server = new ApolloServer({
-    schema: await buildSchema({
-      resolvers: [
-        PingResolver,
-        RoleResolver,
-        UserResolver,
-        BusinessCategoryResolver,
-        StateResolver,
-        CityResolver,
-        BusinessResolver,
-        SubcategoryResolver,
-        CategoryResolver,
-        HeadquarterResolver,
-        ProductCategoryResolver,
-        ProductResolver,
-        RoadTypeResolver,
-        CustomerResolver,
-        BusinessCategoryGroupResolver,
-        AuthResolver,
-        SignupBusinessOwnerResolver,
-        CartResolver,
-        CartItemResolver,
-      ],
-      container: myContainer,
-      globalMiddlewares: [ErrorInterceptor],
-      authChecker: authChecker,
-    }),
+  const schema = await buildSchema({
+    resolvers: [
+      PingResolver,
+      RoleResolver,
+      UserResolver,
+      BusinessCategoryResolver,
+      StateResolver,
+      CityResolver,
+      BusinessResolver,
+      SubcategoryResolver,
+      CategoryResolver,
+      HeadquarterResolver,
+      ProductCategoryResolver,
+      ProductResolver,
+      RoadTypeResolver,
+      CustomerResolver,
+      BusinessCategoryGroupResolver,
+      AuthResolver,
+      SignupBusinessOwnerResolver,
+      CartResolver,
+      CartItemResolver,
+    ],
+    container: myContainer,
+    globalMiddlewares: [ErrorInterceptor],
+    authChecker: authChecker,
+  });
+
+  const apolloServer = new ApolloServer({
+    subscriptions: {
+      onConnect: () => console.log("Client connected for subscriptions"),
+      onDisconnect: () => console.log("Client disconnected from subscriptions"),
+    },
+    schema,
     uploads: false,
     introspection: true,
     playground: true,
@@ -71,9 +80,28 @@ const startGraphqlServer = async (app: Application) => {
       return { user };
     },
   });
-  app.use(graphqlUploadExpress({ maxFieldSize: 10000, maxFiles: 10 }));
 
-  server.applyMiddleware({ app, path: "/graphql" });
+  app.use(graphqlUploadExpress({ maxFieldSize: 10000, maxFiles: 10 }));
+  apolloServer.applyMiddleware({ app, path: "/graphql" });
+
+  const server = createServer(app);
+
+  const port = process.env.PORT || 3000;
+
+  server.listen(port, () => {
+    new SubscriptionServer(
+      {
+        execute,
+        subscribe,
+        schema,
+      },
+      {
+        server: server,
+      }
+    );
+
+    console.log(`Server listening at http://localhost:${port}`);
+  });
 };
 
 export default startGraphqlServer;

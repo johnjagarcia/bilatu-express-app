@@ -22,4 +22,6 @@ export default interface CartRepository {
     customerId: string,
     headquarterId: string
   ): Promise<Cart | null>;
+
+  getCartItemsQuantity(customerId: string): Promise<number>;
 }

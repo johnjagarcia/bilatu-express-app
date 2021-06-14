@@ -27,6 +27,7 @@
     "mongoose-gridfs": "^1.2.48",
     "nanoid": "^3.1.20",
     "reflect-metadata": "^0.1.13",
+    "subscriptions-transport-ws": "^0.9.19",
     "ts-object-builder": "0.0.15",
     "type-graphql": "^1.1.1"
   },

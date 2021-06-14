@@ -108,6 +108,7 @@ import UpdateCart from "../modules/cart/app/update-cart";
 import GetCart from "../modules/cart/app/get-cart";
 import DeleteCart from "../modules/cart/app/delete-cart";
 import DeleteCartItem from "../modules/cart/app/delete-cart-item";
+import GetCartItemsQuantity from "../modules/cart/app/get-cart-items-quantity";
 
 import { CartItemResolver } from "../interfaces/resolvers/cart-item-resolver";
 import CartItemRepository from "../modules/cart-item/domain/CartItemRepository";
@@ -342,6 +343,10 @@ myContainer.bind<DeleteCart>(DeleteCart).to(DeleteCart).inSingletonScope();
 myContainer
   .bind<DeleteCartItem>(DeleteCartItem)
   .to(DeleteCartItem)
+  .inSingletonScope();
+myContainer
+  .bind<GetCartItemsQuantity>(GetCartItemsQuantity)
+  .to(GetCartItemsQuantity)
   .inSingletonScope();
 
 /* Cart Item */
