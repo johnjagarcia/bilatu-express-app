@@ -87,6 +87,8 @@ export default class CartMongoRepository implements CartRepository {
 
   async getCartItemsQuantity(customerId: string): Promise<number> {
     const carts = await CartDocument.find({ customerId }).exec();
-    return carts.length;
+    return carts
+      .map((cart) => cart.cartItems.length)
+      .reduce((a, b) => a + b, 0);
   }
 }
