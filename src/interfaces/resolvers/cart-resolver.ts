@@ -40,24 +40,22 @@ export class CartResolver {
   @inject(GetCartItemsQuantity)
   private getCartItemsQuantityUseCase: GetCartItemsQuantity;
 
-  @Mutation(() => [Cart])
+  @Mutation(() => Boolean)
   async updateCart(
     @PubSub(topic) publish: Publisher<CartPayload>,
-
     @Arg("customer_id") customerId: string,
     @Arg("product_id") productId: string,
     @Arg("quantity") quantity: number
   ) {
-    const result = await this.updateCartUseCase.execute(
+    const carts = await this.updateCartUseCase.execute(
       customerId,
       productId,
       quantity
     );
 
-    const count = await this.getCartItemsQuantityUseCase.execute(customerId);
-    await publish({ count, customerId });
+    await publish({ count: carts.length, customerId });
 
-    return result;
+    return true;
   }
 
   @Query(() => [Cart])
